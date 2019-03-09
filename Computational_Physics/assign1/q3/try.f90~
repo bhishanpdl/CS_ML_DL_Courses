@@ -1,0 +1,36 @@
+!cmd : clear; gfortran try.f90 && ./a.out
+
+
+
+program try    ! This program is a usual and in a sense good for factorials 
+                   !which takes less cpu time.
+  implicit none
+  real :: Err = 1e-8                 !this is how much error alowed
+  real :: term, sum, val
+  integer, parameter :: n=6          !one  counter for my do loops
+  real, dimension(1:n) :: x       !My arrays
+  integer :: i,j
+  real :: time_begin, time_end                                                                                     
+!
+  call CPU_TIME(time_begin)
+  open(unit=1, file='try.dat')
+  x(1) = 0.01
+  do i = 2,n
+     term = 1 
+     sum  = 1
+     x(i) = x(i-1) * (10)
+     j = 1
+     do while (ABS(term/sum) > Err)
+           term = term * (-x(i)/j)
+           sum = sum + term
+           j = j+1
+           Val = ABS((sum-exp(-x(i)))/x(i))
+      end do
+      write (1,*) x(i), sum, val 
+  end do
+
+  close(unit=1)
+  call CPU_TIME(time_end)
+  print *, 'Time of operation was:',time_end-time_begin,'seconds'
+end program try
+

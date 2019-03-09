@@ -1,0 +1,10 @@
+ #Search Root via Newton-Raphson Secant Method : 
+#iteration        root(x)      Y(x)
+    1            0.10000    0.16126E+01
+    2            0.20000    0.24944E+00
+    3            0.30000   -0.80603E+00
+    4            0.22363   -0.17670E-01
+    5            0.22192    0.12324E-02
+    6            0.22203   -0.19816E-05
+ 
+    #the value of Y(x) =         -0.22247E-09   at x =    0.22203

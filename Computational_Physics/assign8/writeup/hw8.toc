@@ -1,0 +1,12 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Question 1: Random Sequences }{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}part abc: intrinsic function mod(a,p)}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}part d: intrinsic function drand(seed) }{4}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}part e: }{5}{subsection.1.3}
+\contentsline {section}{\numberline {2}Question 2: Checks on Random Sequences }{6}{section.2}
+\contentsline {subsection}{\numberline {2.1}part a: checking uniformity for drand }{6}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}part b: Testing sobol sequence }{6}{subsection.2.2}
+\contentsline {section}{\numberline {3}Question 3: Random Walk (Landau second edition page 147) }{6}{section.3}
+\contentsline {subsection}{\numberline {3.1}part ab: }{6}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}part cde: }{8}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}part f: }{9}{subsection.3.3}

@@ -1,0 +1,251 @@
+% topic: latex template for homework
+
+% cmd  : clear; latex writeupAss2.tex
+% cmd  : clear; xdvi writeupAss2.dvi
+% cmd  : clear; dvipdf writeupAss2.dvi
+
+
+\documentclass[11pt,a4paper,english]{article}
+\usepackage{babel}
+\usepackage{amssymb}
+\usepackage{graphicx,subfigure}
+\usepackage[export]{adjustbox}    % for positioning figure
+\usepackage{textcomp}
+\usepackage{fixltx2e}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+%some useful newcommands
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bfig}{\begin{figure}}
+\newcommand{\efig}{\end{figure}}
+\newcommand{\beqa}{\begin{eqnarray}}
+\newcommand{\eeqa}{\end{eqnarray}}
+\newcommand{\beqan}{\begin{eqnarray*}}
+\newcommand{\eeqan}{\end{eqnarray*}}
+\newcommand{\ba}{\begin{array}}
+\newcommand{\ea}{\end{array}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\bfl}{\begin{flushleft}}
+\newcommand{\efl}{\end{flushleft}}
+\newcommand{\btab}{\begin{tabular}}
+\newcommand{\etab}{\end{tabular}}
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\bdes}{\begin{description}}
+\newcommand{\edes}{\end{description}}
+\newcommand{\bdm}{\begin{displaymath}}
+\newcommand{\edm}{\end{displaymath}}
+\newcommand {\IR} [1]{\textcolor{red}{#1}}
+
+% for listing
+\usepackage{enumitem}
+\usepackage[ampersand]{easylist}
+\ListProperties(Hide=100, Hang=true, Progressive=3ex, Style*=-- ,
+Style2*=$\bullet$ ,Style3*=$\circ$ ,Style4*=\tiny$\blacksquare$ )    % for easylist
+
+% for hyperlink
+\usepackage{hyperref}             % for hyperlink
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Sharelatex Example},
+    bookmarks=true,
+    pdfpagemode=FullScreen,
+}
+
+
+% Creating Title for the assesment
+
+\title{Assignment 2}
+\author{Bhishan Poudel}
+\date{Sep, 2015}
+% Don't forget to use \maketitle below \begin{document}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\listoffigures
+\clearpage
+
+\section{Care in evaluating functions}
+
+	This program computes the equation
+	\beqa
+	y=x-sin x
+	\eeqa
+	for a wide range of values of x. \\
+
+	\begin{easylist}
+	& 	With a careful analysis of this function for values of x near zero,
+		we used Taylor expansion of sine series near x equals 0.
+	
+	& 	From the `loss of precision theorem' we found that 
+		for $|x| < 1.9$ we need to use Taylor expansion and beyond 
+		that range we can use the general expression $x − sin x $,so, we did like this.
+	
+	& 	For $ |x| < 1.9 $, we used recurrence relation for 
+		the terms in the series expansion in order to avoid
+		having to compute very large factorials.
+	& 	Here, we used single precision without Taylor expansion x near 0, 
+		and plotted the graph.
+		Then, we used double precision and used Taylor expansion for $|x| < 1.9$.\\
+		The compiler is bright enough that we do not see much difference between two graphs.
+	&	The source code and outputs are following:\\
+		for single precision  : /assign2/qn1/ass2qn1Single.f90  and ass2qn1Single.dat\\
+		for double precision  : /assign2/qn1/ass2qn1Double.f90  and ass2qn1Double.dat 
+	\end{easylist}
+
+	%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}
+	\centering
+	\includegraphics[width=1.0\textwidth,left]{./images/ass2qn1Single.eps}
+	\caption{Plot of x vs $x - sin(x)$ }
+	\end{figure}
+	
+	
+	\begin{figure}
+	
+	\includegraphics[width=1.0\textwidth,left]{./images/ass2qn1Double.eps}
+	\caption{Plot of x vs $x - sin(x)$ }
+	\end{figure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	
+\clearpage
+\section{Continued Fractions}
+
+	Generally, when we encounter singular behaviors we rewrite 
+	the function in terms of a Taylor expansion. 
+	Another possibility is to use so-called continued fractions, which may be
+	viewed as generalizations of a Taylor expansion. When dealing with continued fractions, 
+	one possible approach is that of successive substitutions. 
+	Let us illustrate this by this second order equation:	
+
+	\beqa 
+		x^2 + 4x -1 &=& 0 \\
+        x    &=& 1/ (4 + x) \\  %gives first  +ve root x1=  0.23607
+        x    &=& -4 + 1/x    %gives second -ve root x2= -4.23607
+     \eeqa
+     Here, second equation gives positive root and third equation gives negative root.\\ 
+ 	note: 4th iteration gives correct answer upto 5 digits after decimal\\
+ 	The source code and result are saved in the path:\\
+ 	assign2/qn2/ass2qn2.f90  and ass2qn2.dat\\
+ 	
+\clearpage
+\section{Bessel-functions via Recursion}
+
+	In this question we calculated Bessel functions using upward and downward recursion relations.
+	
+
+	\subsection{• part a}
+		In this part we calculated $j_l(x)$ values for first 25 l values for x = 0.1,1.0,and 10.0.
+		First we used single precision and this gave floating point exception beyond l=20.
+		The code fragment is below:
+		
+		\begin{verbatim}
+			do l = 1,19 !eg. l = 1 (when we reach l = 20, we get floating point exception)
+        
+        			jup(l+1) = ( (2.d0*real(l)+ 1.d0)/x ) * jup(l)  - jup(l-1)
+        			write(kwrite,*) x,l+1,jup(l+1)
+        		end do 
+		\end{verbatim}
+		
+		Then we used double precision. This time we did not get floating point exception.
+		There were two options: upward and downward recursion; I chose downward recursion and normalize
+		it in the end with known value of $j_0(x)$.
+		The source code and results can be found here:
+		single precision: assign2/qn3/ass2qn3Single.f90\\
+		double precision: assign2/qn3/ass2qn3Double.f90\\
+		
+		results for x = 0.1,1.0,and 10.0 are respectively at:\\
+		assign2/qn3/jdown\_A.dat \\
+		assign2/qn3/jdown\_B.dat \\
+		assign2/qn3/jdown\_C.dat \\
+	
+	
+	\subsection{• part b}
+		I tried both upward and downward recursion for spherical Bessel function.
+		In the upward recursion relation with known value of $j_0(x)$ and $j_1(x)$,
+		I calculated values upto $j_25(x)$ for x = 0.1.
+		The true values for x = 0.1 can be found on Abramovitz Stegun table.
+		I used double precision and took x = 0.1. For larger values of l, I found that
+		downward recursion is better than upward recursion.
+		I prepared a table like this:\\
+		x l  jtrue(x)   jup(x)    jdown(x)    rd\_for\_up     rd\_for\_dn\\
+		
+		here, jtrue(x=0.1) values are taken from Stegun book table.\\
+		rd means relative difference.\\
+		we can see the table in:      \\
+		assign2/qn3/rd\_wrt\_true\_A.dat  \\
+		
+		The source code is:\\
+		assign2/qn3/ass2qn3Double.f90\\
+		
+	
+	\subsection{• part c}
+		In this part for downward recursion with large starting value of l, the
+		fragment of source code looks like this:\\
+		\begin{verbatim}
+			jdown(51) = 2.d0 ! this value doesnot change ( if it is >= 19, we get floating point exception)
+    			jdown(50) = 1.d0 ! this value doesnot change (Note: take diff values)
+
+    			do l = 50, 1,-1 !eg. l=50
+        			jdown(l-1) = ((2.d0*real(l)+1.d0)/x)*jdown(l)  - jdown(l+1) ! we get l-1 = 49
+        			write(2,130)x,l-1,jdown(l-1)
+          
+    			end do
+		\end{verbatim}
+		The source code and values for l = 0 to 25 for x = 0.1,1.0,10.0 respectively can be found in:\\
+		assign2/qn3/ass2qn3Double.f90\\
+		assign2/qn3/jdown\_A.dat \\
+		assign2/qn3/jdown\_B.dat \\
+		assign2/qn3/jdown\_C.dat \\
+		
+		
+	
+	\subsection{• part d}
+		In this part I compared upward and downward recursion methods. I formed a table looking like this:\\
+		x     l       jup           jdown               relative difference \\
+		The table can be found in:\\
+		assign2/qn3/relative\_diff\_A.dat \\
+		assign2/qn3/relative\_diff\_B.dat \\
+		assign2/qn3/relative\_diff\_C.dat \\
+		
+		Here, A,B,C are for x =0.1,1.0,and,10.0 respectively.
+		
+	
+	\subsection{• part e}
+		Here, we found that the errors in the upward recursion depend on x.\\
+		Looking the results we found that:\\
+		when x = 0.1, jup and jdown values are approximately similar upto l = 4.\\
+		when x = 1.0, jup and jdown values are approximately similar upto l = 8.\\
+		when x = 10.0, jup and jdown values are approximately similar upto l = 25.\\
+		
+		The tables can be found in:\\
+		assign2/qn3/relative\_diff\_A.dat \\
+		assign2/qn3/relative\_diff\_B.dat \\
+		assign2/qn3/relative\_diff\_C.dat \\
+		
+		Here, A,B,C are for x =0.1,1.0,and,10.0 respectively.
+		This can be explained like this: when x increases the values we take for
+		initial values of $j_0(x)$ decreases,i.e. $j_0(0.1) > j_0(1.0) > j_0(10.0) $.
+		
+		Now, the upward recursion relation is:\\
+		\begin{equation}
+		j_{l+1}(x) =  ((2l + 1)/x) j_l(x) - j_{l-1}(x) 
+		\end{equation}
+		
+		Here we use recursion relation to calculate higher values of $j_l(x)$ by subtracting two terms
+		as shown above.		
+		
+		There is larger error in subtracing small value from large number and smaller is the
+		error when subtracting two similar numbers. Hence the result follows.
+
+
+
+\end{document}
+

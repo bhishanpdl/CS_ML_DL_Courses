@@ -1,0 +1,12 @@
+       ku=     1       np=   100     sum =  0.528056 ucheck =   0.280557
+       ku=     1       np= 10000     sum =  0.505640 ucheck =   0.564040
+       ku=     1       np=100000     sum =  0.501254 ucheck =   0.396655
+ 
+       ku=     3       np=   100     sum =  0.270519 ucheck =   0.205189
+       ku=     3       np= 10000     sum =  0.254243 ucheck =   0.424299
+       ku=     3       np=100000     sum =  0.250483 ucheck =   0.152639
+ 
+       ku=     7       np=   100     sum =  0.133263 ucheck =   0.082626
+       ku=     7       np= 10000     sum =  0.126942 ucheck =   0.194175
+       ku=     7       np=100000     sum =  0.124720 ucheck =   0.088483
+ 

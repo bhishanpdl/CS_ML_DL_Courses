@@ -1,0 +1,194 @@
+% Title : hw10
+% Author: Bhishan Poudel
+% Date  : Nov 11, 2015
+
+\documentclass[11pt,a4paper,english]{article}
+\usepackage{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx,subfigure}
+\usepackage[export]{adjustbox}    % for positioning figure
+\usepackage{textcomp}
+\usepackage{fixltx2e}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+% some useful newcommands
+\newcommand{\nl}{\nonumber \\}
+\newcommand{\no}{\nonumber}
+\newcommand{\ul}{\underline}
+\newcommand{\ol}{\overline}
+
+%some useful newcommands
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bfig}{\begin{figure}}
+\newcommand{\efig}{\end{figure}}
+\newcommand{\beqa}{\begin{eqnarray}}
+\newcommand{\eeqa}{\end{eqnarray}}
+\newcommand{\beqan}{\begin{eqnarray*}}
+\newcommand{\eeqan}{\end{eqnarray*}}
+\newcommand{\ba}{\begin{array}}
+\newcommand{\ea}{\end{array}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\bfl}{\begin{flushleft}}
+\newcommand{\efl}{\end{flushleft}}
+\newcommand{\btab}{\begin{tabular}}
+\newcommand{\etab}{\end{tabular}}
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\bdes}{\begin{description}}
+\newcommand{\edes}{\end{description}}
+\newcommand{\bdm}{\begin{displaymath}}
+\newcommand{\edm}{\end{displaymath}}
+\newcommand {\IR} [1]{\textcolor{red}{#1}}
+
+% for listing
+\usepackage{enumitem}
+\usepackage[ampersand]{easylist}
+\ListProperties(Hide=100, Hang=true, Progressive=3ex, Style*=-- ,
+Style2*=$\bullet$ ,Style3*=$\circ$ ,Style4*=\tiny$\blacksquare$ )    % for easylist
+\newcommand{\begl}{\begin{easylist}}
+\newcommand{\eegl}{\end{easylist}}
+
+% for hyperlink
+\usepackage{hyperref}             % for hyperlink
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,    
+    bookmarks=true
+    }
+
+
+% Creating Title for the assessment
+
+\title{Homework 10: Applications of the Metropolis Algorithm}
+\author{Bhishan Poudel}
+\date{Nov 11,2015}
+
+% to avoid indentation in paragraphs
+\usepackage[parfill]{parskip}
+
+% begin of document
+\begin{document}
+\maketitle
+\tableofcontents
+\listoffigures
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Question 1: Metropolis Algorithm }
+In this question I used metropolis algorithm to sample $2x$.\\
+I proposed the values of $x$ from $0$ to $1$ using drand function.\\
+The immediate next path values was taken in the range plus minus $0.1$ about current $x$.\\
+We can see the xvalues lies between 0 and 1 in the file xvalues.dat.\\
+I used 20 bins of 25 time steps and created 4 data segments. There is also
+initial bin values and initial xvalues data file.
+I chose 1000 walkers and nstep is 100.\\
+
+I plotted the graph of sample points in the bins which is hw10qn1a.eps.\\
+The animated pictures (gif files) of sample paths and xvalues was also created.\\
+Executing the program hw10qn1.f90 gives output data files hw10qn1.dat and xvalues.dat.\\
+Running xvalues.gp gives 4 png images and using website gifmaker.me I created the gif file xvalues.gif.
+And I did similar for the samplePath.gif.
+
+	The solution directory is :\\
+	\begin{verbatim}
+	location             : hw10/qn1/ 
+	source code          : hw10qn1.f90
+	datafiles            : hw10qn1.dat,initial.dat,xvalues.dat,initialbinvalues.dat
+	gnuplot file         : xvalues.gp, samplePath.gp
+	plots                : hw10qn1a.eps
+	animated graphics    : samplePath.gif, xvalues.gif
+	\end{verbatim}
+ 
+
+	    The figures are shown below:\\
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{figures/hw10qn1a.eps}
+	\caption{sampling of $2x$ }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Question 2: Lattice Path Integration }
+
+	In this part I solved the ground state probability for the $1D$ Harmonic Oscillator via
+	Feynman path integration using the Metropolis algorith.\\
+	Here, I translated the code qmc.java into hw10qn2.f90 and variables and paramter names are same
+	as in the given book.\\
+	I examined some of the actual space-time paths in the simulation.
+	While comparing with classical trajectory, the path was found similar.
+	Here in the code I chose max value is 250000.
+	We can get a more precise value of wavefunction by taking this value larger.
+	
+	The plot shows wavefunction is gaussian and is similar to classical trajectory.	
+		
+		The solution directory is :\\
+	\begin{verbatim}
+	location             : hw10/qn2
+	source code          : hw10qn2.f90
+	datafiles            : hw10qn2a.dat,hw10qn2b.dat
+	plots                : hw10qn2a.eps,hw10qn2b.eps	
+	hints                : qmc.java (Landau 2E , chap 28.1.3) 
+	\end{verbatim}
+
+     The figures are shown below:\\
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{figures/hw10qn2a.eps}
+	\caption{ground state wavefunction }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+		   
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{figures/hw10qn2b.eps}
+	\caption{position vs. time }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Question 3: Gravitational Potential }
+    In this question I tested the wave function computation for the gravitational potential.
+    Here, I modified the energy value of the code hw10qn2.f90 and got the appropriate energy value.
+    I plotted the graph for wavefunction and position-time. Which can be seen below. 
+    		The solution directory is :\\
+	\begin{verbatim}
+	location             : hw10/qn3
+	source code          : hw10qn3.f90
+	datafiles            : hw10qn3.dat
+	\end{verbatim}
+	
+	    The figures are shown below:\\
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{figures/hw10qn3a.eps}
+	\caption{ground state wavefunction }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+		    The figures are shown below:\\
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{figures/hw10qn3b.eps}
+	\caption{position vs. time }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+
+\end{document}
+

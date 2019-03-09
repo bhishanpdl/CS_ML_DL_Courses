@@ -1,0 +1,14 @@
+!cmd:  clear; f90 junk.f90 && ./a.out
+
+program ifDoLoop
+implicit none
+real x
+ x = .01
+ 
+    
+    
+    
+    write(*,*) 1+x
+    
+      
+end program

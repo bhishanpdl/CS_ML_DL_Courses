@@ -1,0 +1,215 @@
+% Title : hw12
+% Author: Bhishan Poudel
+% Date  : Nov 28, 2015
+
+\documentclass[11pt,a4paper,english]{article}
+\usepackage{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx,subfigure}
+\usepackage[export]{adjustbox}    % for positioning figure
+\usepackage{textcomp}
+\usepackage{fixltx2e}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+% some useful newcommands
+\newcommand{\nl}{\nonumber \\}
+\newcommand{\no}{\nonumber}
+\newcommand{\ul}{\underline}
+\newcommand{\ol}{\overline}
+
+%some useful newcommands
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bfig}{\begin{figure}}
+\newcommand{\efig}{\end{figure}}
+\newcommand{\beqa}{\begin{eqnarray}}
+\newcommand{\eeqa}{\end{eqnarray}}
+\newcommand{\beqan}{\begin{eqnarray*}}
+\newcommand{\eeqan}{\end{eqnarray*}}
+\newcommand{\ba}{\begin{array}}
+\newcommand{\ea}{\end{array}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\bfl}{\begin{flushleft}}
+\newcommand{\efl}{\end{flushleft}}
+\newcommand{\btab}{\begin{tabular}}
+\newcommand{\etab}{\end{tabular}}
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\bdes}{\begin{description}}
+\newcommand{\edes}{\end{description}}
+\newcommand{\bdm}{\begin{displaymath}}
+\newcommand{\edm}{\end{displaymath}}
+\newcommand {\IR} [1]{\textcolor{red}{#1}}
+
+% for listing
+\usepackage{enumitem}
+\usepackage[ampersand]{easylist}
+\ListProperties(Hide=100, Hang=true, Progressive=3ex, Style*=-- ,
+Style2*=$\bullet$ ,Style3*=$\circ$ ,Style4*=\tiny$\blacksquare$ )    % for easylist
+\newcommand{\begl}{\begin{easylist}}
+\newcommand{\eegl}{\end{easylist}}
+
+% for hyperlink
+\usepackage{hyperref}             % for hyperlink
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,    
+    bookmarks=true
+    }
+
+
+% Creating Title for the assessment
+
+\title{Homework 12: Boundary Value Problems}
+\author{Bhishan Poudel}
+\date{Nov 28,2015}
+
+% to avoid indentation in paragraphs
+\usepackage[parfill]{parskip}
+
+% begin of document
+\begin{document}
+\maketitle
+\tableofcontents
+\listoffigures
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Question 1: Legendre Polynomial}
+In this question I calculated the values of Legendre polynomials of first kind 
+of order three, four, and five.
+I chose the range of x-values from $-0.9999$ to $0.9999$ and relative precision
+$1e-6$. We can see in the data files that all three polynomials converges to $1.0000$
+when $x=1$.
+I also compared some of the values from my data and the Abramovich-Stegun Table (page $342$) for $n=3$.
+We can also check other values in Wolfram Alpha, which are pretty much accurate.
+
+\begin{verbatim}
+x            0.250              0.500             0.750         1.000
+table        -0.33 59 375       -0.43 75 000      -0.07 03 125  1.000
+my value     -0.33 59 367       -0.43 74 972      -0.07 03 093  1.000  
+\end{verbatim}
+The table shows values are accurate upto third decimal points.
+For the order four and five I used Wolfram Alpha to find the values.
+command: legendre $p(n,x)$.
+
+\begin{verbatim}
+     x           my p(4,x)     wolfram p(4,x)        my p(5,x)     wolfram p(5,x)
+     0.701001    -0.374935221  -0.41130010           -0.366720672  -0.366725162    
+     0.801001    -0.229389047  -0.2300239            -0.398291064  -0.3982963965
+     0.901001    0.159050061    0.213968570          -0.034653366  -0.0346544594
+             
+
+\end{verbatim}
+
+	The solution directory is :\\
+	\begin{verbatim}
+	location             : hw12/qn1/ 
+	source code          : hw12qn1.f90
+	plots                : hw12qn1.eps
+	datafiles            : n3.dat, n4.dat, n5.dat
+	datafiles            : n3compare.dat, n4compare.dat, n5compare.dat (for comparison)
+	provided subroutines : rk4.f90 
+	\end{verbatim}
+	
+	    The figures are shown below:\\
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{figures/hw12qn1.eps}
+	\caption{Legendre Polynomials }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+	
+\clearpage	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Question 2: $3$D Isotropic Harmonic Oscillator  }
+
+	The potential of $3$D harmonic oscillator is given by:\\
+	
+	\beq
+	V(r) = \frac{1}{2}m\omega^2r^2 	
+	\eeq
+	Where, $m$ is mass of oscillator, $\omega$ is angular frequency and $r$ is
+	radial distance.
+	The energy of three dimensional oscillator is:
+	\beq 
+	E_n = (n + \frac{3}{2}) \hbar\omega
+	\eeq
+	The energy state $n$ is given by:\\
+	\beq 
+	n = 2k + l
+	\eeq 
+	Here, $k =$ no. of nodes.\\
+	$l=$  angular momentum quantum number.\\
+	$\hbar = \frac{h}{2\pi} = $ reduced planck's constant.
+	
+	The radial schrodinger equation is:\\
+	\beq 
+	-\frac{\hbar^2}{2m}u'' + [V + \frac{\hbar^2}{2m} \frac{l(l+1)}{r^2}]u = Eu
+	\eeq 
+	Rearranging yields:\\
+	\beq 
+	u'' = [\frac{l(l+1)}{r^2} - \frac{2m}{\hbar^2}(E-V) ]u 
+    \eeq 
+
+   	
+	\subsection{part 2.1: Solving radial equation }
+	
+	In this part I solved the radial differential equation using a subroutine from the internet mentioned below.
+	I calculated the ground state energy and its value is:\\
+	\begin{verbatim}
+	        for l=0  for l=1   for l=2
+	 Energy 5.499    6.499     7.499   
+	 
+	\end{verbatim}
+	
+	
+		The solution directory is :\\
+	\begin{verbatim}
+	location             : hw12/qn2/ 
+	source code          : hw12qn2.f90
+	plots                : hw12qn2.eps, hw12qn2d.eps
+	datafiles            : hw12qn2.dat, hw12qn2d.dat
+	downloded subroutine : nsolve.f90 and ho.f90
+	reference            : http://infty.net/nsolve/nsolve.html
+	\end{verbatim}
+	
+		    The figures are shown below:\\
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{figures/hw12qn2.eps}
+	\caption{$3$d harmonic oscillator }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+    
+    \subsection{part 2.4: Perturbed $3d$ harmonic oscillator }
+	
+    In this part I added a quartic perturbation term $\lambda\rho^4$ to the 
+    potential of the oscillator and calculated the ground state energy and wavefunction
+    for $l=0$. I chose $\lambda=0.1$.\\
+    The value of perturbed ground state energy is :\\
+    $E_{0(perturbed)} = 7.899 $\\
+    The plot of wavefunction is showen below:\\
+        %		    The figures are shown below:\\
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{figures/hw12qn2d.eps}
+	\caption{Perturbed $3d$ harmonic oscillator }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+    
+    
+
+\end{document}
+

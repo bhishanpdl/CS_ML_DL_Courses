@@ -1,0 +1,383 @@
+% Title : hw11
+% Author: Bhishan Poudel
+% Date  : Nov 20, 2015
+
+\documentclass[11pt,a4paper,english]{article}
+\usepackage{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx,subfigure}
+\usepackage[export]{adjustbox}    % for positioning figure
+\usepackage{textcomp}
+\usepackage{fixltx2e}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+% some useful newcommands
+\newcommand{\nl}{\nonumber \\}
+\newcommand{\no}{\nonumber}
+\newcommand{\ul}{\underline}
+\newcommand{\ol}{\overline}
+
+%some useful newcommands
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bfig}{\begin{figure}}
+\newcommand{\efig}{\end{figure}}
+\newcommand{\beqa}{\begin{eqnarray}}
+\newcommand{\eeqa}{\end{eqnarray}}
+\newcommand{\beqan}{\begin{eqnarray*}}
+\newcommand{\eeqan}{\end{eqnarray*}}
+\newcommand{\ba}{\begin{array}}
+\newcommand{\ea}{\end{array}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\bfl}{\begin{flushleft}}
+\newcommand{\efl}{\end{flushleft}}
+\newcommand{\btab}{\begin{tabular}}
+\newcommand{\etab}{\end{tabular}}
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\bdes}{\begin{description}}
+\newcommand{\edes}{\end{description}}
+\newcommand{\bdm}{\begin{displaymath}}
+\newcommand{\edm}{\end{displaymath}}
+\newcommand {\IR} [1]{\textcolor{red}{#1}}
+
+% for listing
+\usepackage{enumitem}
+\usepackage[ampersand]{easylist}
+\ListProperties(Hide=100, Hang=true, Progressive=3ex, Style*=-- ,
+Style2*=$\bullet$ ,Style3*=$\circ$ ,Style4*=\tiny$\blacksquare$ )    % for easylist
+\newcommand{\begl}{\begin{easylist}}
+\newcommand{\eegl}{\end{easylist}}
+
+% for hyperlink
+\usepackage{hyperref}             % for hyperlink
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,    
+    bookmarks=true
+    }
+
+
+% Creating Title for the assessment
+
+\title{Homework 11:Differential Equations}
+\author{Bhishan Poudel}
+\date{Nov 20,2015}
+
+% to avoid indentation in paragraphs
+\usepackage[parfill]{parskip}
+
+% begin of document
+\begin{document}
+\maketitle
+\tableofcontents
+\listoffigures
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Question 1: Solution of a Differential Equation }
+    In this question I solved the differential equation:
+    \beqa
+    y'(x)= 2(y+1) \quad, -2<x<2 \quad, y(0) = 0
+    \eeqa
+    whose exact solution is :
+    \beqa
+    y(x) = e^{2x} - 1
+    \eeqa
+    using five different numerical methods to find the solution,viz.:
+    \begin{easylist}
+    & Euler's Method
+    & Improved Euler's Method
+    & Fourth Order Runge-Kutta Method
+    & Adaptive Runge-Kutta Method
+    & Picard's Method
+    \end{easylist}
+    And assessed their errors and robustness.
+    \textbf{Note: in the plots $1b$ and $1d$ we may see that there is sudden transition of $y$ value from high value
+            to low value this is not due to the mistake but it is due to the way I printed values in my datafile. In the
+            data file i have printed from $0$ to $+2$ first, then $0$ to $-2$. If i take from $-2$ to $2$ the
+            result will be same, nature of curve will remain same, error bar will remain same and there will
+            be no sudden transion. } 
+    
+
+	\subsection{part a: Euler method with different step sizes}	
+	In this part I used Euler' method to solve the differential equation.
+	I used step-size $h=0.05,0.10,.015,0.20$ and plotted the results with error bar.\\
+	From the graph we can say that when step size increases the error also increases.
+	This means smaller value of step-size gives better result for the Euler's method.
+	
+		The solution directory is :\\
+	\begin{verbatim}
+	location             : hw11/qn1/qn1a
+	source code          : hw11qn1a.f90 and euler.f90
+	plots                : hw11qn1a.eps 
+	datafiles            : euler05.dat, euler10.dat, euler15.dat, euler20.dat, also euler875.dat	  
+	\end{verbatim}
+			    The figures are shown below:\\
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{figures/hw11qn1a.eps}
+	\caption{Euler method with different step-sizes }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+	
+	\subsection{part b: Comparison of Euler, Modified Euler, and fourth order Runge Kutta methods}	
+	In this part I solved the given differential equation using three different methods, viz.
+	 Euler, Improved Euler and Fourth Order Runge-Kutta methods. From the datafile and plot, 
+	 we can see that Runge-Kutta method is slightly better than Improved-Euler-Method, and Improved
+	 Euler method is much better than Euler method.
+	
+			The solution directory is :\\
+	\begin{verbatim}
+	location             : hw11/qn1/qn1b
+	source code          : hw11qn1b.f90 
+	plots                : hw11qn1b.eps
+	datafiles            : hw11qn1b.dat
+	provided codes       : rk4.f90 and test1rk4.f90 
+	\end{verbatim}
+			    The figures are shown below:\\
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.5]{figures/hw11qn1b.eps}
+	\caption{Euler, Modified Euler, and fourth order Runge Kutta methods }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+	
+	\subsection{part c: Adaptive Runge-Kutta Method}	
+	In this part I used Adaptive Runge-Kutta Method ($difsis.f90$) to solve
+	the given differential equation. I found that final value of $h$ was found to
+	be $0.875$ in difsis, so I chose that value of step-size in Euler method (qn 1a)
+	and compared the results. I found that adaptive Runge-Kutta method is much better
+	than Euler's method. Also looking datafiles I found that Adaptive Runge-Kutta method
+	is better than Fourth Order Runge Kutta and Improved-Euler method.
+	
+		The solution directory is :\\
+	\begin{verbatim}
+	location             : hw11/qn1/qn1c
+	source code          : hw11qn1c.f90   and euler.f90 (inside qn1a)
+	plots                : hw11qn1c.eps
+	datafiles            : hw11qn1c.dat   and euler875.dat (inside qn1a)
+	provided subroutines : difsis.f90 
+	\end{verbatim}
+			    The figures are shown below:\\
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.5]{figures/hw11qn1c.eps}
+	\caption{Adaptive Runge-Kutta Method }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+	
+	 
+	\subsection{part d: Picard's Iteration Method}	
+	In this part I used Picard's method to solve the given differential equation.
+	For iterations $=4$, I found significant error. But for higher iterations
+	There is less error and result is pretty accurate.
+	
+		The solution directory is :\\
+	\begin{verbatim}
+	location             : hw11/qn1/qn1d
+	source code          : hw11qn1d.f90
+	plots                : hw11qn1d.f90
+	datafiles            : picard4.dat, picard8.dat, picard12.dat, picard16.dat 
+	\end{verbatim}
+	
+		    The figures are shown below:\\
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{figures/hw11qn1d.eps}
+	\caption{Picard's Method with different iterations }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Question 2: The Ideal Harmonic Oscillator  }
+
+	In this part I solved the Newton's equation of motion for the ideal harmonic
+	oscillator:
+	\beqa 
+	\frac{d^{2}x}{dt^{2}} = -\frac{k}{m} x = - \omega_{0}^{2} x
+	\eeqa
+	with frequency
+	\beqa 
+	\omega_{0} = \frac{2\pi}{T} = \sqrt{\frac{k}{m}}
+	\eeqa
+	and analytic solution
+	\beqa 
+	x(t) = A sin(\omega_{0}t + \phi)
+	\eeqa
+	where, $A$ is amplitude and $\phi$ is phase constant.\\
+	First I rewrite the second-order differential equation as two coupled first-
+	order differential equations:
+	\beqa 
+	\frac{dx(t)}{dt} = v(t) \\
+	\frac{dv(t)}{dt} = -\omega_{0}^{2}x(t) 
+	\eeqa
+	Then I used Runge-Kutta method to solve this system of coupled first order 
+	differential equations.\\	
+		
+		The solution directory is :\\
+	\begin{verbatim}
+	location             : hw11/qn2    
+	source code          : hw11qn2.f90
+	datafiles            : positiontime05.dat, positiontime10.dat
+	plots                : positiontime05.eps, positiontime10.eps
+	datafiles            : energyerror05.dat,  energyerror10.dat   
+	datafiles            : energyerror05a.dat, energyerror10a.dat 
+	plots                : energyerror.eps,    energytime.eps,stability.eps
+	provided subroutines : rk4.f90
+	hints                : Landau 2E, Chapter 15 
+	\end{verbatim}
+
+	\subsection{part 2.1: }	
+	Here, I picked values of $k$ and $m$ such that the period $T$ is a nice
+	number to work with. I chose $T =1$.
+
+	\subsection{part 2.2: }
+	
+    I tried out step sizes starting at $h = 0.10$ and then took smaller sizes ($h=0.05$).
+    I solved for several periods. Here, the solution look smooth and have a period
+    that never changes even after many oscillations.
+    
+			    The figures are shown below:\\
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.5]{figures/positiontime05.eps}
+	\caption{position vs time plot at $h=0.05$ }
+	\end{figure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+	
+				    The figures are shown below:\\
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.5]{figures/positiontime10.eps}
+	\caption{position vs time plot at $h=0.10$ }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    	
+
+    
+    
+    \subsection{part 2.3: }
+	Here, I plotted the computed solution together with the analytic solution.
+	I also compared the computed solutions with analytic one.
+	I computed a relative error at $t = 9.5T, 19.5T, and \quad 29.5T$ for different step
+	sizes as in part $2.2$.
+    \begin{verbatim}
+                          relative error at
+    t      h=0.05          h=0.10
+    9.5    0.169           0.266
+    19.5   0.207           0.853
+    29.5   0.559           0.936
+    \end{verbatim}	
+    		    The figures are shown below:\\
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{figures/compare05.eps}
+	\caption{ideal harmonic oscillator when $ h=0.05$ }
+	\end{figure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{figures/compare10.eps}
+	\caption{ideal harmonic oscillator when $ h=0.10$ }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     
+	
+	\subsection{part 2.4: }
+	Here, we have not explicitly built energy conservation into the solution 
+	of the differential equation. Nonetheless, since no friction is included, the 
+	total energy must be a constant of motion. This is a demanding test of the 
+	accuracy of the solution. Here, when $h=0.05$, I found constant value of
+	energy to be $ 0.197389D+02 $.
+    
+    \subsection{part 2.5: }
+    The total energy at any time $t$, given by
+    \beqa 
+    E = \frac{1}{2}kx(t)^{2} + \frac{1}{2}mv(t)^{2}
+    \eeqa
+    must be constant. I checked the numerically computed energy is constant at the 
+    different times given when  $h=0.5$ and $h=0.10$ and plotted the relative error in percent as
+    function of step size $h$. 
+    		    The figures are shown below:\\
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{figures/energytime.eps}
+	\caption{Plot of energy vs time }
+	\end{figure}
+
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{figures/energyerror.eps}
+	\caption{Plot of relative energy in percentage as a function of step-size }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+	\subsection{part 2.6: }
+	The long-term \textit{stability} of the solution is given by\\
+    \bdm
+    \quad log[\frac{|E(t)-E(t=0)|}{E(t=0)}]
+    \edm
+    I plotted this stability versus time curve.
+    		    The figures are shown below:\\
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{figures/stability.eps}
+	\caption{Plot of relative energy in percentage as a function of step-size }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    
+    \subsection{part 2.7: }
+    Here, I added the viscous friction term to this model. I added a force\\
+    \beqa 
+    F_{f} = -bv
+    \eeqa 
+    where, $b$ is a parameter and $v$ is the velocity.\\
+    I modified the code and investigated the qualitative changes of the solution that
+    occur for increasing values of $b$:
+    \begin{easylist}
+    & \textbf{Underdamped:} $b \leq 2m\omega_{0} $
+    & \textbf{Critically damped:} $b = 2m\omega_{0}$
+    & \textbf{Over damped:} $b \geq 2m\omega_{0}$
+    \end{easylist}
+    Here, In my code I have taken $\omega_{0} = 2\pi \quad and \quad m =1$.
+    
+    I plotted the behavior of those three cases and demonstrated the behavior of
+    the solution.
+    
+        		    The figures are shown below:\\
+    %%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{figures/damped.eps}
+	\caption{Plot of relative energy in percentage as a function of step-size }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+	
+\end{document}
+

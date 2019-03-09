@@ -1,0 +1,11 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Question 1: Quantum Uncertainty in the Harmonic Oscillator}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}part a: Hermite Polynomials and Wavefunctions}{2}{subsection.1.1}
+\contentsline {subsubsection}{\numberline {1.1.1}part a(i): Hermite Polynomials}{2}{subsubsection.1.1.1}
+\contentsline {subsubsection}{\numberline {1.1.2}part a (ii): Harmonic Oscillator Wave Functions}{4}{subsubsection.1.1.2}
+\contentsline {subsection}{\numberline {1.2}part b: Wavefunction for $n=30$ }{5}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}part c: Mean Square Position}{6}{subsection.1.3}
+\contentsline {section}{\numberline {2}Question 2: High Energy Scattering Cross Section}{7}{section.2}
+\contentsline {subsection}{\numberline {2.1}part a: Yukawa Potential}{7}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}part b: Scattering Amplitude}{9}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}part c: Total Scattering Cross Section}{11}{subsection.2.3}

@@ -1,0 +1,30 @@
+! this is good way
+! cmd: clear; gfortran -o b.out b.f90 && ./b.out
+	
+
+
+      integer :: n        !n needs to be a an integer for the function float to work 
+      double precision :: x, sum, element, err, diff 
+      x = 0.01d0
+        write(6,*) '   ________________________________________________' 
+        write(6,*) '      x       imax          sum           diff'       !Just to create a header of the table.
+        write(6,*) '   ________________________________________________' 
+      do while (x < 1000 )                    
+      x = x*10                  !This is why I set up the the initial value of x=0.01 
+                                !that way the first calculation will be x=0.1
+      err = 1E-8       !According to the question 
+      sum = 1.d0       !Initial value represent the first term in the expansion 
+      element = 1.d0   !Initial value must be 1 so it does not affect the first term
+      n = 0            
+      	do while ((abs(element/sum) > err))
+      	n = n + 1
+      	element = element*(-x)/float(n)  !Calculated the "good" way with the built-in function
+      	sum = sum + element
+      end do
+      diff = abs(sum - EXP(-x))/sum      
+        write(6,10000) x,element,sum,diff
+10000 format (3x,F6.1,3(3x,E11.4)) 
+!             1<<1st column 1<<next three columns   
+      CALL CPU_TIME(TIME) 
+      end do
+      end

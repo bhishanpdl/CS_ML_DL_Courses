@@ -1,0 +1,6 @@
+ #  Runge-Kutta for ideal harmonic oscillator
+                #t                 x            Energy    Relative error
+                
+      0.950000D+01     -0.959979D+00      0.182725D+02      0.743037D+01
+      0.195000D+02     -0.915121D+00      0.168462D+02      0.146561D+02
+      0.295000D+02     -0.867958D+00      0.155312D+02      0.213179D+02

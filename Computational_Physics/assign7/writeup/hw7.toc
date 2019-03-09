@@ -1,0 +1,13 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Question 1: Testing Matrix Calls}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}part a: Verify the inverse of the matrix}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}part b: verify properties of inverse matrix}{2}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}part c: comparison of determinant}{2}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}part d: use of LAPACK subroutine $dgesv$ }{3}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.5}part e: use of LAPACK subroutines dsyev and dgeev}{3}{subsection.1.5}
+\contentsline {subsection}{\numberline {1.6}part f: use of LAPACK subroutine dgeev}{4}{subsection.1.6}
+\contentsline {section}{\numberline {2}Question 2: Schrodinger equation via diagonalization }{5}{section.2}
+\contentsline {subsection}{\numberline {2.1}part a: Derivation of radial wavefunction}{5}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}part b: solving radial equation using diagonalizing routine dsyev}{5}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}part c: extrapolation to get energy value when h tends to zero}{11}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}part d: plot of radial wavefunction }{11}{subsection.2.4}

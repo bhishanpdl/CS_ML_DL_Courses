@@ -1,0 +1,237 @@
+\documentclass[11pt,a4paper,english]{article}
+\usepackage{babel}
+\usepackage{amssymb}
+\usepackage{graphicx,subfigure}
+\usepackage[export]{adjustbox}    % for positioning figure
+\usepackage{textcomp}
+\usepackage{fixltx2e}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+%some useful newcommands
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bfig}{\begin{figure}}
+\newcommand{\efig}{\end{figure}}
+\newcommand{\beqa}{\begin{eqnarray}}
+\newcommand{\eeqa}{\end{eqnarray}}
+\newcommand{\beqan}{\begin{eqnarray*}}
+\newcommand{\eeqan}{\end{eqnarray*}}
+\newcommand{\ba}{\begin{array}}
+\newcommand{\ea}{\end{array}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\bfl}{\begin{flushleft}}
+\newcommand{\efl}{\end{flushleft}}
+\newcommand{\btab}{\begin{tabular}}
+\newcommand{\etab}{\end{tabular}}
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\bdes}{\begin{description}}
+\newcommand{\edes}{\end{description}}
+\newcommand{\bdm}{\begin{displaymath}}
+\newcommand{\edm}{\end{displaymath}}
+\newcommand {\IR} [1]{\textcolor{red}{#1}}
+
+% for listing
+\usepackage{enumitem}
+\usepackage[ampersand]{easylist}
+\ListProperties(Hide=100, Hang=true, Progressive=3ex, Style*=-- ,
+Style2*=$\bullet$ ,Style3*=$\circ$ ,Style4*=\tiny$\blacksquare$ )    % for easylist
+\newcommand{\begl}{\begin{easylist}}
+\newcommand{\eegl}{\end{easylist}}
+
+% for hyperlink
+\usepackage{hyperref}             % for hyperlink
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Sharelatex Example},
+    bookmarks=true,
+    pdfpagemode=FullScreen,
+}
+
+
+% Creating Title for the assessment
+
+\title{Assignment 5}
+\author{Bhishan Poudel}
+\date{\today}
+
+% begin of document
+\begin{document}
+\maketitle
+\tableofcontents
+\listoffigures
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Question 1: Integral of sine x}
+In this problem we calculated the integral of $sin(x)$ from $0$ to pi.
+The exact value is $2.0$.
+We calculated numerical integral values using Trapezoid,Simpsons,and Gauss-Legendre method.
+The template integ1.f90 was provided and further modification was done in the template.
+errors are absolute errors. 
+
+	
+	\subsection{part a}
+	
+	In this part we prepared a table for the values of the given integral.\\
+	source code is inside qn1: single and double folders. sp is single precision dp is double precision.\\
+	source codes are: hw5qn1sp.f90 and hw5qn1dp.f90\\
+	outputs  are    : hw5qn1sp.dat and hw5qn1dp.dat\\
+	
+	for the plot:\\
+	source codes are: hw5qn1spplot.f90 and hw5qn1dpplot.f90\\
+	outputs  are    : hw5qn1spplot.dat and hw5qn1dpplot.dat\\
+	
+	
+	\subsection{part b}
+    In this part, we plotted the graph of $log_{10}(e)$ vs. $log_{10}(N)$ 
+    for 3 methods for single and double precisions.\\
+	The graphs looks like this:\\
+	
+	%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{hw5qn1sp.eps}
+	\caption{Plot for Qn1 single precision }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%	%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{hw5qn1dp.eps}
+	\caption{Plot for Qn1 double precision }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+
+	
+	\subsection{part c}
+
+	In part b, I have plotted the graph to determine the power-law dependence
+	of the error on the number of points N.
+	
+	\subsection{part d}
+	The plot for both single and double precision were drawn.
+	
+	\subsection{part e}
+	Here, I used Trapezoid method to calculate the integral value of the given function.
+	In this case we don't know the exact value of the integral.
+	The integrals are calculated as the sum of the terms.
+	We can choose some tolerance value such as:\\
+	modulus(term/sum) is greater than tolerance.\\
+
+\clearpage	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Question 2: Integral of sine squared x}
+The given integrals are:
+\bdm
+I = \int_{-1}^{1} \!\! \sqrt{1-x^2}\,dx 
+\edm
+and,\\
+
+\bdm
+I = \int_{-1}^{1} \!\! {sin^2 \theta}\,d\theta
+\edm
+The exact value $=\Pi/2 = 0.157079632679E+01$\\
+I used Trapezoidal,Simpson,and Gauss-Legendre method to calculate the numerical interal
+value of the given integrals separately.\\
+I used double precision to solve the problem.\\
+The source codes are  : hw5qn2a.f90 and hw5qn2b.f90\\
+The outputs are       : hw5qn2a.dat,and hw5qn2b.dat\\
+To get the precision $=0.157E+01$\\
+for square root integral:\\
+Trapezoid iteration $= 233$\\
+Simpson iteration $= 17$\\
+Gauss iteration $= 5$\\
+To get the precision $=0.157079632679E+01$\\
+for sine squared integral:\\
+Trapezoid iteration $= 85$\\
+Simpson iteration $=5$\\
+Gauss iteration $=13$\\
+
+
+\clearpage
+\section{Question 3: Plank's black body radiation}
+
+\subsection{part a: Gauss-Laguerre}
+In this part we calculated numerical value using Gauss-Laguerre method for 2,4,6,8,and 10 points.
+The error plot was also drawn.
+The given inegral is :\\
+\bdm
+I = \int_0^\infty \!\! \frac{x^3}{e^{x} -1}\,dx
+\edm
+Comparing to the standard format for generalized Gauss-Laguerre quadrature:\\
+
+\bdm
+I = \int_0^\infty \!\! e^{-x}x^{\alpha}\ \!f(x)\,dx 
+\edm
+we get:
+$\alpha = 3 $ and \\
+
+\bdm
+f(x) = \frac{1}{1-e^{-x}} 
+\edm
+The source code is: hw5qn3a.f90 \\
+The plot   is     : hw5qn3.eps \\
+
+	%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{hw5qn3.eps}
+	\caption{Plot for Qn3 }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{part b: Gauss-Legendre}
+Here, to map the given interval (0 to infinity) into (0 to 1)\\
+I substituted :
+$x=\tan\frac{pi*y}{2}$ \\
+Then, I calculated the value of f(y) for the integral of the form:\\
+\bdm
+I = \int_0^1 \! \!f(y)\,dy 
+\edm
+The source code is: hw5qn3b.f90 \\
+The output   is     : hw5qn3b.dat \\
+\clearpage
+\section{Question 4 Sine Integral}
+In this question the sample code integ3.f90 was provided for the integral:
+
+\bdm
+I = \int_1^{1000} \quad \frac{sin(x)}{x}\,dx
+\edm
+We have to solve numerically the integral:\\
+\bdm
+I = \int_1^{100} \quad \frac{sin(40x)}{x}\,dx
+\edm
+So, I substituted $y=40x$, then, I got the integral:\\
+\bdm
+I = \int_{40}^{4000} \quad \frac{sin(y)}{y}\,dy
+\edm
+The exact solution is : $Si(4000)-Si(40)$\\
+Where Sine integral 'Si' is an entire function defined as:\\
+\bdm
+Si(z) = \int_{0}^{z} \quad \frac{sin(t)}{t}\,dt
+\edm
+The source code is  : hw5qn4.f90 and hw5qn4plot.f90 \\
+The output      is  : hw5qn4.dat and hw5qn4plot.dat \\
+The plot        is  : hw5qn4.eps \\
+
+	%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{hw5qn4.eps}
+	\caption{Plot for Qn4 }
+	\end{figure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+

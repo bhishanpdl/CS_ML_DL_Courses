@@ -1,0 +1,242 @@
+% cmd  : clear; latex writeupAss3.tex
+% cmd  : clear; xdvi writeupAss3.dvi
+% cmd  : clear; dvipdf writeupAss3.dvi
+
+
+\documentclass[11pt,a4paper,english]{article}
+\usepackage{babel}
+\usepackage{amssymb}
+\usepackage{graphicx,subfigure}
+\usepackage[export]{adjustbox}    % for positioning figure
+\usepackage{textcomp}
+\usepackage{fixltx2e}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+%some useful newcommands
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bfig}{\begin{figure}}
+\newcommand{\efig}{\end{figure}}
+\newcommand{\beqa}{\begin{eqnarray}}
+\newcommand{\eeqa}{\end{eqnarray}}
+\newcommand{\beqan}{\begin{eqnarray*}}
+\newcommand{\eeqan}{\end{eqnarray*}}
+\newcommand{\ba}{\begin{array}}
+\newcommand{\ea}{\end{array}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\bfl}{\begin{flushleft}}
+\newcommand{\efl}{\end{flushleft}}
+\newcommand{\btab}{\begin{tabular}}
+\newcommand{\etab}{\end{tabular}}
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\bdes}{\begin{description}}
+\newcommand{\edes}{\end{description}}
+\newcommand{\bdm}{\begin{displaymath}}
+\newcommand{\edm}{\end{displaymath}}
+\newcommand {\IR} [1]{\textcolor{red}{#1}}
+
+% for listing
+\usepackage{enumitem}
+\usepackage[ampersand]{easylist}
+\ListProperties(Hide=100, Hang=true, Progressive=3ex, Style*=-- ,
+Style2*=$\bullet$ ,Style3*=$\circ$ ,Style4*=\tiny$\blacksquare$ )    % for easylist
+\newcommand{\begl}{\begin{easylist}}
+\newcommand{\eegl}{\end{easylist}}
+
+% for hyperlink
+\usepackage{hyperref}             % for hyperlink
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Sharelatex Example},
+    bookmarks=true,
+    pdfpagemode=FullScreen,
+}
+
+
+% Creating Title for the assessment
+
+\title{Assignment 3}
+\author{Bhishan Poudel}
+\date{Sep, 2015}
+
+% begin of document
+\begin{document}
+\maketitle
+\tableofcontents
+\listoffigures
+\clearpage
+
+\section{Finding roots}
+
+	This program computes the root of the equation
+	\beqa
+	f(x)=x^2 - 7x -ln(x)
+	\eeqa
+	using bisection and secant method. \\
+	
+	\subsection{Bisection Method}
+	\subsubsection{first root}
+	
+	The source code is:\\
+	assign3/qn1/bisection.f90\\
+	
+	to comile and run this code for the first root:\\
+	%f90 bisection.f90 && ./a.out > bisection1.dat
+	
+	f90 bisection.f90 \&\& ./a.out $>$ bisection1.dat
+	
+	then, we can see output file in the path:\\
+	assign3/qn1/bisection1.dat\\
+	
+	note that: at the line 14, the code fragment looks like
+	\begin{verbatim}
+	!! initial range (x0,x1) to find the root within it
+
+    x0 = 0.1d0   !! for first root
+    x1 = 1.0d0   
+    !x0 = 5.1d0   !! for second root
+    !x1 = 10.0d0
+	\end{verbatim}
+	
+	\subsubsection{second root}
+	
+	The source code is:\\
+	assign3/qn1/bisection.f90\\
+	
+	to comile and run this code for the second root:\\
+	%f90 bisection.f90 && ./a.out > bisection2.dat
+	
+	f90 bisection.f90 \&\& ./a.out $>$ bisection2.dat
+	
+	then, we can see output file in the path:\\
+	assign3/qn1/bisection2.dat\\
+	
+	note that: at the line 14, the code fragment looks like
+	\begin{verbatim}
+	!! initial range (x0,x1) to find the root within it
+
+    !x0 = 0.1d0   !! for first root
+    !x1 = 1.0d0   
+    x0 = 5.1d0   !! for second root
+    x1 = 10.0d0
+	\end{verbatim}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\subsection{Newton-Raphson Secant Method}
+	\subsubsection{first root}
+	
+	The source code is:\\
+	assign3/qn1/secant.f90\\
+	
+	to comile and run this code for the first root:\\
+	%f90 secant.f90 && ./a.out > secant1.dat
+	
+	f90 secant.f90 \&\& ./a.out $>$ secant1.dat
+	
+	then, we can see output file in the path:\\
+	assign3/qn1/secant1.dat\\
+	
+	note that: at the line 33, the code fragment looks like
+	\begin{verbatim}
+	!FIRST ROOT
+      xinitial = 0.1d0  
+      xfinal   = 1.0d0
+       
+      ! SECOND ROOT
+      !xinitial = 5.1d0  
+      !xfinal   = 10.0d0 
+	\end{verbatim}
+	
+	\subsubsection{second root}
+	
+	The source code is:\\
+	assign3/qn1/secant.f90\\
+	
+	to comile and run this code for the second root:\\
+	%f90 secant.f90 && ./a.out > secant2.dat
+	
+	f90 secant.f90 \&\& ./a.out $>$ secant2.dat
+	
+	then, we can see output file in the path:\\
+	assign3/qn1/secant2.dat\\
+	
+	note that: at the line 33, the code fragment looks like
+	\begin{verbatim}
+	!FIRST ROOT
+      !xinitial = 0.1d0  
+      !xfinal   = 1.0d0
+       
+      ! SECOND ROOT
+      xinitial = 5.1d0  
+      xfinal   = 10.0d0 
+	\end{verbatim}
+	
+	
+	
+	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\subsection{Comparison}
+	\begl
+	& The positive roots of the equation was found upto five significant figures.\\
+	& In comparison to secant method the bisection method is slower.\\
+	  For example: \\
+	  To find the the first root 0.22203, bisection method required 18 iterations and secant method
+	  needed 6 iterations.
+	  We can see that difference in:\\
+	  assign3/qn1/bisection1.dat\\
+	  assign3/qn1/secant1.dat\\
+	  
+	& While using these Bisection and Secant method we need prior approximate position of zero.
+	  
+	  
+	
+	\eegl
+	
+
+	
+	
+\clearpage
+\section{Bond Length of the NaCl Molecule}
+\subsection{Plot of V(r)}
+
+In this question I wrote a code to plot r vs. V(r).\\
+The source code and outputs are:\\
+assign3/qn2/ass3qn2.f90\\
+assign3/qn2/potentialplot.dat\\
+assign3/qn2/potential.eps\\
+
+ 	
+ 	%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics[width=1.0\textwidth,left]{./images/potential.eps}
+	\caption{Plot of r vs. V(r) }
+	\end{figure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 	
+\clearpage
+
+\subsection{Minimum of V(r) and roots}
+In this question I wrote a code to find roots when V(r) is minimum.\\
+The source code and outputs are:\\
+assign3/qn2/ass3qn2.f90\\
+assign3/qn2/findroot.dat\\
+
+In the problem we are asked to find equilibrium distance between Na and Cl ions.
+After finding the root upto 3 significant figures, I found that 
+\beqa r_{eq} = 2.32
+\eeqa
+To find the root I used secant method, because it is faster than bisection method.
+To find root we have also to guess the approximate position of root. First I plotted 
+the graph in the website Wolfram Alpha and saw the nature of the graph.
+Then I wrote the code. The constant values were provided in the question.
+
+
+\end{document}
+

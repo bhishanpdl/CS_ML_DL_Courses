@@ -1,0 +1,385 @@
+\documentclass[11pt,a4paper,english]{article}
+\usepackage{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx,subfigure}
+\usepackage[export]{adjustbox}    % for positioning figure
+\usepackage{textcomp}
+\usepackage{fixltx2e}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+% some useful newcommands
+\newcommand{\nl}{\nonumber \\}
+\newcommand{\no}{\nonumber}
+\newcommand{\ul}{\underline}
+\newcommand{\ol}{\overline}
+
+%some useful newcommands
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bfig}{\begin{figure}}
+\newcommand{\efig}{\end{figure}}
+\newcommand{\beqa}{\begin{eqnarray}}
+\newcommand{\eeqa}{\end{eqnarray}}
+\newcommand{\beqan}{\begin{eqnarray*}}
+\newcommand{\eeqan}{\end{eqnarray*}}
+\newcommand{\ba}{\begin{array}}
+\newcommand{\ea}{\end{array}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\bfl}{\begin{flushleft}}
+\newcommand{\efl}{\end{flushleft}}
+\newcommand{\btab}{\begin{tabular}}
+\newcommand{\etab}{\end{tabular}}
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\bdes}{\begin{description}}
+\newcommand{\edes}{\end{description}}
+\newcommand{\bdm}{\begin{displaymath}}
+\newcommand{\edm}{\end{displaymath}}
+\newcommand {\IR} [1]{\textcolor{red}{#1}}
+
+% for listing
+\usepackage{enumitem}
+\usepackage[ampersand]{easylist}
+\ListProperties(Hide=100, Hang=true, Progressive=3ex, Style*=-- ,
+Style2*=$\bullet$ ,Style3*=$\circ$ ,Style4*=\tiny$\blacksquare$ )    % for easylist
+\newcommand{\begl}{\begin{easylist}}
+\newcommand{\eegl}{\end{easylist}}
+
+% for hyperlink
+\usepackage{hyperref}             % for hyperlink
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,    
+    bookmarks=true
+    }
+
+
+% Creating Title for the assessment
+
+\title{Homework 7: Eigensystems}
+\author{Bhishan Poudel}
+\date{\today}
+
+% to avoid indentation in paragraphs
+\usepackage[parfill]{parskip}
+
+% begin of document
+\begin{document}
+\maketitle
+\tableofcontents
+\listoffigures
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Question 1: Testing Matrix Calls}
+In this question we studied the quantum uncertainty in the harmonic oscillator.\\
+
+	
+	\subsection{part a: Verify the inverse of the matrix}
+	
+	In this part I verified the inverse of the matrix A .
+	First i solved the matrix analytically.
+	Then I wrote the program to calculate the inverse of the given matrix.\\
+	The given matrix is :\\
+    \begin{displaymath}
+      A=
+  		\begin{pmatrix}
+    			4 & -2 & 1 \\
+    			3 &  6 & -4 \\
+    			2 &  1 &  8 
+  		\end{pmatrix}
+	\end{displaymath}
+	The inverse of matrix $A$ is:\\
+	\bdm
+	 A^{-1} = \frac{1}{263} 	      
+  		\begin{pmatrix}
+    			52 & 17 & 2 \\
+    		   -32 & 30 & 19 \\
+    		   -9  & -8 & 30 
+  		\end{pmatrix}
+	\edm
+	The solution location is :\\
+	\begin{verbatim}
+	location             : hw7/qn1abc
+	provided subroutine  : dminv.f90
+	source code          : dminv_test.f90
+	additional subroutine: print_matrix.f90
+	makefile             : Makefile
+	\end{verbatim}
+	
+	\subsection{part b: verify properties of inverse matrix}
+	
+    In this part I verified the inverse matrix property. The source code is same as in part $a$.
+    I got unit matrix of dimension three for single significant figures precision, however, for other 
+    significant figures I got some deviations from perfect anticipated unit matrix.
+
+   \subsection{part c: comparison of determinant}
+   In this part I compared the determinant from my analytic and computational result. They matched
+   correctly. Source code is same as in part a.	
+	
+	
+	\subsection{part d: use of LAPACK subroutine $dgesv$ }
+    In this part I used the $LAPACK$ library routine $ dgesv$ to solve the system of three linear equations
+    of the form:
+    
+    \begin{eqnarray}
+     AX=B
+     \end{eqnarray}
+      
+	Where:\\
+	    \begin{displaymath}
+      A=
+  		\begin{pmatrix}
+    			4 & -2 & 1 \\
+    			3 &  6 & -4 \\
+    			2 &  1 &  8 
+  		\end{pmatrix}
+	\end{displaymath}
+	And,
+	    \begin{displaymath}
+      B=
+  		\begin{pmatrix}
+    			4 \\
+    		  -10 \\
+    		   22 
+  		\end{pmatrix}
+	\end{displaymath}
+	I solved this equation for $X$.\\
+	The solution is :\\
+	\begin{displaymath}
+      X=
+  		\begin{pmatrix}
+    			0.312 \\
+    		  -0.038 \\
+    		   2.677 
+  		\end{pmatrix}
+	\end{displaymath}
+	\begin{verbatim}
+	location             : hw7/qn1d/
+	library used         : LAPACK
+	source code          : dgesv_test.f90
+	makefile             : Makefile
+	\end{verbatim}
+	
+	\subsection{part e: use of LAPACK subroutines dsyev and dgeev}
+    In this part the given matrix is symmetric. At first i used the lapack routine for symmetric
+    matrix 'dsyev' to calculate the eigenvalues and eigenvectors.\\
+    Then, i used the another lapack routine 'dgeev' to calculate the real eigenvalues and right 
+    eigenvectors.I got the same eigenvalues and proportionate eigenvectors. 
+    Note that these lapack subroutine gives normalized eigenvectors and eigenvectors 
+    are different from that in Wolfram Alpha website.
+    	The given symmetric matrix is :\\
+    \begin{displaymath}
+      A=
+  		\begin{pmatrix}
+    			1 & -4 &  2 \\
+    		   -4 &  1 & -2 \\
+    			2 & -2 & -2 
+  		\end{pmatrix}
+	\end{displaymath}
+	Here, I found same eigenvalues for both of the subroutines.\\
+	The eigenvector for non-degenerate eigenvalue is same.\\
+	However, for the doubly degenerate eigenvalue, the eigenvectors are different.\\   
+    The solution location is :\\
+	\begin{verbatim}
+	location             : hw7/qn1e/dgesv and dgeev
+	library used         : LAPACK
+	source code          : dgesv_test.f90, dgeev_test.f90
+	output files         : dgesv.dat,dgeev.dat
+	makefile             : Makefile
+	\end{verbatim}
+        
+    \subsection{part f: use of LAPACK subroutine dgeev}
+    In this part the given input matrix is non-symmetric. I used the LAPACK subroutine dgeev to find the
+    eigenvalues and eigenvectors. The eigenvectors are printed as columns in the same order as 
+    the eigenvalues appears in my code.
+        	The given non-symmetric matrix is :\\
+    \begin{displaymath}
+      A=
+  		\begin{pmatrix}
+    			-2 &  2 &  -3 \\
+    		     2 &  1 &  -6 \\
+    			-1 & -2 &   0 
+  		\end{pmatrix}
+	\end{displaymath}
+	Here, I found that the calculated eigenvectors are proportional to exact eigenvectors.\\
+	Here, for the degenerate eigenvalue -3, the eigen vectors are:\\
+    $ X_{2}^{'}	= 0.23 X_{2} - 0.11 X_{3} $\\
+    $ X_{3}^{'}	= 0.67 X_{2} - 0.48 X_{3} $\\
+	
+	
+	    
+    The solution location is :\\
+    \begin{verbatim}
+	location             : hw7/qn1f/
+	library used         : LAPACK
+	source code          : dgeev_test.f90
+	output files         : hw7qn1f.dat
+	makefile             : Makefile
+	\end{verbatim}
+
+\clearpage	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Question 2: Schrodinger equation via diagonalization }
+
+   	
+	\subsection{part a: Derivation of radial wavefunction}
+	
+	In this part the radial part of wave function was provided as equation 10.\\
+	I solved the further steps and derived the equation 15.\\
+	The file is $hw7qn2.pdf$.
+	
+	\subsection{part b: solving radial equation using diagonalizing routine dsyev}
+	
+    In this part I solved the radial part of schrodinger equation using diagonalization method.
+    I followed the process of Morten's Computational Physics $2014$ Fall notes section $7.8$.
+    The given potential of the harmonic oscillator is :\\
+    \beqa
+    V(x)=\frac{1}{2}kx^{2}
+    \text{  where, k=1}
+    \eeqa
+    The step size is given by:\\
+    \beqa
+    h&=&\frac{ R_{max} - R_{min} } {N_{step}}\\
+    &=&\frac{ 10 - (-10) } {100}\no\\
+    &=& 0.1\no   
+    \eeqa
+    Then i created arrays of dimension $0$ to nstep for $x_{i}$ and $V_{i}$.\\
+    where,\\
+    \beqa
+    x(i) &=& R_{min} + i * h\\
+    \text{ where, i = 1,2,3,...,nstep-1}\no\\
+    V(i)&=& x(i) * x(i)    
+    \eeqa
+    The diagonal elements d(i) has dimension $1$ to $nstep-1$.\\
+    Then, the diagonal matrix elements are given by:\\
+    \beqa
+    d(i)=\frac{2}{h^{2}} + V(i)
+    \eeqa
+    The non-vanishing non-diagonal elements e(i) has dimension $1$ to $nstep-1$.\\
+    The all non-vanishing non-diagonal matrix elements are given by:\\
+    \beqa
+    e(i)=\frac{-1}{h^{2}}
+    \eeqa
+    And, all the rest elements are zero.\\
+    Then i constructed the symmetric matrix $A$ such that:\\
+    \bdm
+    Au = 2E u
+    \edm
+    Here, $A$ is symmetric matrix of dimension (nstep * nstep).\\
+    $u$ is column eigenvector of dimension ($1$ to $nstep-1$).\\
+    The matrix $A$ looks like this:\\
+    \begin{displaymath}
+    A = 
+ 	\begin{pmatrix}
+ 	 	d_{1}   & e_{1}   & 0         & 0      & \cdots   & 0            & 0 \\
+	 	e_{1}   & d_{2}   & e_{}2     & 0      & \cdots   & 0            & 0 \\
+	 	0       & e_{2}   & d_{3}     & e_{3}  & 0        & \cdots       & 0 \\
+	 	\cdots  & \cdots  & \cdots    & \cdots &\cdots    & \cdots       & \cdots  \\
+	 	0       & \cdots  & \cdots    & \cdots & \cdots   & d_{nstep-2}  & e_{nstep-1} \\
+	 	0       & \cdots  &\cdots     & \cdots & \cdots   & e_{nstep-1}  & d_{nstep-1} 
+ 	\end{pmatrix}
+    \end{displaymath}
+        The matrix $u$ looks like this:\\
+    \begin{displaymath}
+    u = 
+ 	\begin{pmatrix}
+ 	 	u_{1}  \\
+	 	u_{2}  \\
+	 	\cdots \\
+	 	\cdots \\
+	 	\cdots \\
+	 	u_{nstep-1}  
+ 	\end{pmatrix}
+    \end{displaymath}        
+    
+    Diagonalizing the matrix will yield the twice of the energy values.\\
+    For three dimensional harmonic oscillator the energy eigenvalues are given by:\\
+    \beqa
+    E_{n,l}&=& (2k+l+\frac{3}{2}) \hbar \omega\\
+    n&=& 2k+l
+    \eeqa
+    where k is no. of nodes in a wavefunction.\\
+    Here, I found $k$ from the plot of wavefunction which was zero, one and two for ground state, first
+    excited, and second excited state respectively.\\
+    Also, here $l=0$ for all the cases.\\
+    Hence,\\
+    \clearpage
+    ground state $$ E_{0} = 3/2 \quad \hbar \omega $$ \\
+    first excited state $$ E_{1} = 7/2 \quad \hbar \omega $$ \\
+    second excited state $$ E_{2} = 11/2 \quad \hbar \omega $$ \\
+    
+    For simplicity, i have plotted the graph for one dimensional case.\\
+    I have plotted eigenvalue versus value of h.\\
+    The nature of the plot will be same and energy values will be changed.\\
+    Here, each of my energy eigenvalue are in terms of $ \frac{\hbar\omega}{2}$.\\
+    Also, no. of nodes are 1,2,3 for ground,first,and second excited states.\\
+    for ground state:\\
+    1d value $=  1 $ so,  3d value $= 1 + (1/2) = 3/2$ \\
+    for first excited state:\\
+    1d value $=  3 $ so,  3d value $= 2 + (3/2) = 7/2$ \\
+    for second excited state:\\
+    1d value $=  5 $ so,  3d value $= 3 + (5/2) =11/2$ \\
+    
+    
+    The figures are shown below:\\
+    %%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{e0.eps}
+	\caption{Energy eigenvalue for ground state }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{e1.eps}
+	\caption{Energy eigenvalue for first excited state }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{e2.eps}
+	\caption{Energy eigenvalue for second excited state }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+   \subsection{part c: extrapolation to get energy value when h tends to zero}
+	
+	Here, I used xmgrace to extrapolate the energy value.\\
+	The values found are 1,3,and 5.\\
+	The plots are shown above.\\	
+	\subsection{part d: plot of radial wavefunction }
+    In this part I plotted the first three eigenvectors from the code `hw7qn2.f90'.\\
+    %%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{u123.eps}
+	\caption{Radial wave functions for three lowest eigenstates }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    The solution location is :\\
+	\begin{verbatim}
+	location             : hw7/qn2
+	library              : LAPACK (dsyev subroutine)
+	source code          : hw7qn2.f90
+	output data file     : u123.dat
+	plot                 : u123.eps
+	makefile             : Makefile
+	handsout             : hw7qn2a.pdf
+	\end{verbatim} 
+
+\end{document}
+

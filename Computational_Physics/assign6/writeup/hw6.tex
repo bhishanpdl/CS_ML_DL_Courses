@@ -1,0 +1,309 @@
+\documentclass[11pt,a4paper,english]{article}
+\usepackage{babel}
+\usepackage{amssymb}
+\usepackage{graphicx,subfigure}
+\usepackage[export]{adjustbox}    % for positioning figure
+\usepackage{textcomp}
+\usepackage{fixltx2e}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+%some useful newcommands
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bfig}{\begin{figure}}
+\newcommand{\efig}{\end{figure}}
+\newcommand{\beqa}{\begin{eqnarray}}
+\newcommand{\eeqa}{\end{eqnarray}}
+\newcommand{\beqan}{\begin{eqnarray*}}
+\newcommand{\eeqan}{\end{eqnarray*}}
+\newcommand{\ba}{\begin{array}}
+\newcommand{\ea}{\end{array}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\bfl}{\begin{flushleft}}
+\newcommand{\efl}{\end{flushleft}}
+\newcommand{\btab}{\begin{tabular}}
+\newcommand{\etab}{\end{tabular}}
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\bdes}{\begin{description}}
+\newcommand{\edes}{\end{description}}
+\newcommand{\bdm}{\begin{displaymath}}
+\newcommand{\edm}{\end{displaymath}}
+\newcommand {\IR} [1]{\textcolor{red}{#1}}
+
+% for listing
+\usepackage{enumitem}
+\usepackage[ampersand]{easylist}
+\ListProperties(Hide=100, Hang=true, Progressive=3ex, Style*=-- ,
+Style2*=$\bullet$ ,Style3*=$\circ$ ,Style4*=\tiny$\blacksquare$ )    % for easylist
+\newcommand{\begl}{\begin{easylist}}
+\newcommand{\eegl}{\end{easylist}}
+
+% for hyperlink
+\usepackage{hyperref}             % for hyperlink
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Sharelatex Example},
+    bookmarks=true,
+    pdfpagemode=FullScreen,
+}
+
+
+% Creating Title for the assessment
+
+\title{Assignment 6}
+\author{Bhishan Poudel}
+\date{\today}
+
+% begin of document
+\begin{document}
+\maketitle
+\tableofcontents
+\listoffigures
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Question 1: Polynomial Interpolation}
+In this question we study the lagrange interpolation of given data.\\
+provided source code: lagrange.f90\\
+provided input data : crossX2.dat\\
+ 
+
+	
+	\subsection{part a}
+	
+In this problem I used the code lagrange.f90 and modified it to fit the entire spectrum with one polynomial. I used the polynomial of degree 8 (took e=9 in the code). The I used this fit to plot the cross section in steps of 5 Mev.\\
+    folder       : qn1a\\
+	source code  : lagrange.f90 (it was provided)\\
+	outputs      : lagrangeout.dat\\
+	plots        : hw6qn1a.eps\\
+	
+		%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{hw6qn1a.eps}
+	\caption{hw6qn1a }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	
+	
+	\subsection{part b}
+In this part I plotted the graph to find full width half maximum.\\
+my data   : peak = $75Mev$, FWHM = $57.35$\\
+book value: peak = $78Mev$, FWHM = $55Mev$ \\ 
+    folder       : qn1b\\
+	source code  : lagrange.f90 (it was provided)\\
+	outputs      : lagrangeout.dat\\
+	plots        : hw6qn1b.eps\\
+	
+		%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{hw6qn1b.eps}
+	\caption{hw6qn1b }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\subsection{part c}
+In question I have used lagrange interpolation with e=9, this means we fit the spectrum with polynomial of degree 8. In this part 1c, I modified the code $lagrange.f90$ and  interpolate the given data in the interval of $5Mev$. The plots for $e=2,3,4,5,6,7,8,and 9$ are drawn.\\
+    folder       : qn1c\\
+	source code  : lagrange.f90 (it was provided)\\
+	outputs      : lagrangeout2.dat.lagrangeout3.dat,etc\\
+	plots        : hw6qn1c.eps\\
+	
+		%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{hw6qn1c.eps}
+	\caption{hw6qn1c }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	
+	\subsection{part d}
+In question I have used the interpolation routine polint.f90 from
+Numerical Recipe and repeated parts a and c. This routine also gives the error bars. This routine uses cubic polynomial in the subintervals of the given interval of data set.\\
+interpretation: near the peak the errors are high.\\
+    folder       : qn1d\\
+	source code  : lagrange2.f90, polint.f90\\
+	inputs       : crossX2.dat\\
+	outputs      : polintout.dat\\
+	plots        : hw6qn1d.eps\\
+	
+		%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{hw6qn1d.eps}
+	\caption{hw6qn1d }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	
+	\subsection{part e}
+In this part I used the cubic spline from xmgrace and plotted the
+data with error bars.\\
+    folder       : qn1e\\
+	source code  :\\ 
+	inputs       : crossX2.dat\\
+	outputs      : \\
+	plots        : hw6qn1e.eps\\
+	
+		%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{hw6qn1e.eps}
+	\caption{hw6qn1e }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Question 2: Spline Interpolation}
+In this problem we studied two spline interpolations. First is spline.f90 from Numerical Recipe with driver program splineNR.f90.
+And second is cubhermdh.f90 from Huber et.al with driver program splinecbh.f90. 
+
+	
+	\subsection{part a}
+In this part I used both spline subroutines with the data set crossX2.dat and plotted the interpolations.\\
+    folder       : qn2a/huber,numRecipe,and plots\\
+	source code  : spline.f90 , splineNR.f90, etc\\
+	inputs       : crossX2.dat\\
+	outputs      : splinecbhout.dat,splineNRout.dat\\
+	plots        : hw6qn2a.eps\\
+	
+		%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{hw6qn2a.eps}
+	\caption{hw6qn2a }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+	
+	
+	\subsection{part b}
+The data set corssX2.dat has only 9 points of data so it does not have enough points to allow us to investigate how the quality of the spline interpolation depend on the number of points given. So I created such a function using Breit-Wigner function of Eq. $5.1$ of first edition of Landau.\\
+\bdm
+\sigma = \frac{\sigma_{0}}{({E - E_{\gamma}})^{2} + \frac{{\gamma}^{2}}{4}}
+= \frac{\sigma_{0}}{({E - 75})^{2} + \frac{{57.35}^{2}}{4}}
+\edm
+where, $\sigma_{0}, E_{\gamma}$, and $\gamma$ are constants to be determined by the fitting.\\
+Here, from question 1b, when $E=75 Mev$, $\sigma(E) = 83.5 $ and resonance width $ \gamma = 57.35$.
+Then,\\
+
+\bdm
+\sigma(75) = \frac{\sigma_{0}}{0 + 822.26}\\
+\edm
+
+\bdm
+83.5 = \frac{\sigma_{0}}{822.26}\\
+\edm
+$\sigma_{0}=68658.34$\\
+Therefore, the required function to interpolate the data is:\\
+
+\bdm
+\sigma = \frac{68658.34}{(E-75)^{2}+822.26}
+\edm
+
+Then using this function I write down a code experimental.f90 and
+created three different outputs experimental10.dat, experimental20.dat and experimental40.dat for interval length 10,20, and 40 Mev.
+
+	
+	\subsection{part c}
+In this part to comapare two splines viz. huber and recipe, i used input 'experimental' data as experimental10.dat, experimental20.dat, and experimental40.dat.\\
+For huber, the outputs are huber10.dat,huber20.dat,and huber40.dat\\
+For Numerical Recipe, the outputs are recipe10.dat,recipe20.dat,and recipe40.dat\\
+Then, using the outputs i compared both splines methods for different interval lengths 10,20, and 40 Mev and plotted the graphs.\\
+interpretation: I found that error in recipe method is larger.\\
+		%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{hw6qn2c10.eps}
+	\caption{hw6qn2c10 }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+			%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{hw6qn2c20.eps}
+	\caption{hw6qn2c20 }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+			%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{hw6qn2c40.eps}
+	\caption{hw6qn2c40 }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+
+	
+	\subsection{part d}
+	In this part I derived the required equations for the spline.
+	the pdf is inside the folder 2d. Also, i submitted the paper copy in the mailbox.
+	
+	\subsection{part e}
+	\subsubsection{analytic method}
+In this part I integrated the spectrum using analytic and spline method. For the analytic method i used the Breit-Wigner function\\
+\bdm
+\sigma = \frac{68658.34}{(E-75)^{2}+822.26}
+\edm
+to integrate I used two different integration techniques,viz. gauss-legendre and trapezoidal method.\\
+for gauss,     answer = $6107.78$ for $n=26$\\
+for trapezoid, answer = $6107.78$ for $n=368$\\
+the outputs are: gauss.dat and trapezoid.dat\\
+
+\subsubsection{spline method}
+
+For the spline method i used hermite spline method of Huber et al.
+First I found the zeros of Legendre polynomials using integ1.f90 and gauleg.f90 codes. I used $ng=18$ gauss points and found 18 $x$ values and 18 weights.The output is legzeros.dat inside the folder legzeros.\\
+
+Then, I used hermite spline codes to create a spline data of interval $0.01$ from 0 to 200 using the input crossX2.dat. The output is spline.dat inside the folder hermiteSpline.\\
+
+Then, I created the grid to integrate using spline method.\\
+First I extracted x values and weights from the data legzeros.dat using awk.\\
+awk '\{print \$1\}' legzeros.dat $>$ legx.dat \\
+awk '\{print \$2\}' legzeros.dat $>$ legw.dat \\
+
+here, legx.dat has 19 lines and spline.dat has 2001 lines. I extracted only the common lines between these two files using awk command in two steps:
+\noindent
+\begin{verbatim}
+awk 'FNR==NR{a[$1];next};!($1 in a)' legx.dat spline.dat > nonmatch.dat     
+awk 'FNR==NR{a[$1];next};!($1 in a)' nonmatch.dat spline.dat > spline2.dat
+\end{verbatim}
+
+Now spline2.dat has only 19 lines. I combined this spline2.dat with leg2.dat using paste command:\\
+\begin{verbatim}
+paste spline2.dat legw.dat > grid.dat
+\end{verbatim}
+Now, grid has 3 columns x,f(x),and weight. I used this grid to integrate the spectrum.\\
+The code for integration is inside integration folder.\\
+    folder       : $qn2e/integration\_spline/integration$\\
+	source code  : integration.f90\\
+	inputs       : grid.dat\\
+	outputs      : integration.dat\\
+	
+for analytic method,  result = $6107.78$\\
+for spline   method,  result = $6096.84$\\
+
+To minimize the errors we should use lower degree of polynomial (e.g. cubic polynomial) in the splines of sub-intervals of given interval. Also, hermite spline gives less error than the numerical recipe splines.
+	
+	\subsection{part f}
+In the analytic integration we used the Breit-Wigner function to integrate directly.The Breit-Wigner function was also calculated from fitting the given original data crossX2.dat. But, in case of spline method we first get the interpolated data (spline.dat) from the original data (crossX2.dat). But we don't have the weight of all the data in the spline.dat. So we have first to find the Legendre zeros and weights and take only the data that are common to these two. Then we integrate these values. So, to directly use the spline method to find the integration result semi-analytically, there should be a program which does all these things under a single program, i.e. finds legndre zeros, weights, compare and takes only values that have weights, and then integrate.
+
+\end{document}
+

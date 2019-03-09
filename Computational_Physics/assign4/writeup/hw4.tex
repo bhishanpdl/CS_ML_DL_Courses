@@ -1,0 +1,267 @@
+\documentclass[11pt,a4paper,english]{article}
+\usepackage{babel}
+\usepackage{amssymb}
+\usepackage{graphicx,subfigure}
+\usepackage[export]{adjustbox}    % for positioning figure
+\usepackage{textcomp}
+\usepackage{fixltx2e}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+%some useful newcommands
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bfig}{\begin{figure}}
+\newcommand{\efig}{\end{figure}}
+\newcommand{\beqa}{\begin{eqnarray}}
+\newcommand{\eeqa}{\end{eqnarray}}
+\newcommand{\beqan}{\begin{eqnarray*}}
+\newcommand{\eeqan}{\end{eqnarray*}}
+\newcommand{\ba}{\begin{array}}
+\newcommand{\ea}{\end{array}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\bfl}{\begin{flushleft}}
+\newcommand{\efl}{\end{flushleft}}
+\newcommand{\btab}{\begin{tabular}}
+\newcommand{\etab}{\end{tabular}}
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\bdes}{\begin{description}}
+\newcommand{\edes}{\end{description}}
+\newcommand{\bdm}{\begin{displaymath}}
+\newcommand{\edm}{\end{displaymath}}
+\newcommand {\IR} [1]{\textcolor{red}{#1}}
+
+% for listing
+\usepackage{enumitem}
+\usepackage[ampersand]{easylist}
+\ListProperties(Hide=100, Hang=true, Progressive=3ex, Style*=-- ,
+Style2*=$\bullet$ ,Style3*=$\circ$ ,Style4*=\tiny$\blacksquare$ )    % for easylist
+\newcommand{\begl}{\begin{easylist}}
+\newcommand{\eegl}{\end{easylist}}
+
+% for hyperlink
+\usepackage{hyperref}             % for hyperlink
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Sharelatex Example},
+    bookmarks=true,
+    pdfpagemode=FullScreen,
+}
+
+
+% Creating Title for the assessment
+
+\title{Assignment 4}
+\author{Bhishan Poudel}
+\date{\today}
+
+% begin of document
+\begin{document}
+\maketitle
+\tableofcontents
+\listoffigures
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Question 1}
+
+	This program computes the first derivative of functions\\
+	\beqa
+	f(x)&=&cos(x)\\
+	f(x)&=&exp(x)\\
+	f(x)&=&\sqrt(x)\\
+	\eeqa
+	at points $x=0.1$,$x=1$,$x=30$ \\
+	
+	\subsection{part a}
+	
+	
+	The source code is:\\
+	assign4/qn1/hw4qn1.f90\\
+	
+	The outputs are :\\
+	
+	\begin{verbatim}
+	for single precision:
+	cos01sp.dat,cos1sp.dat,cos30sp.dat for x=0.1,1.0,and30.0 respectively
+	exp01sp.dat,exp1sp.dat,exp30sp.dat
+	sq01sp.dat,sq1sp.dat,sq30sp.dat
+	
+	For double precision:
+	cos01dp.dat,cos1dp.dat,cos30dp.dat for x=0.1,1.0,and30.0 respectively
+	sq01dp.dat,sq1dp.dat,sq30dp.dat
+	
+	Note: double precision for exp(x) was not required.
+	
+	\end{verbatim}
+	I chose $h = 40.0$ for $cos(x)$ and $\exp(x)$ and $h=0.1$ for $\sqrt{x}$\\
+	The step size was reduced upto the machine precison upto $1e-6$ for single precision
+	and $1e-14$ for double precision.
+	
+	
+	\subsection{part b}
+	The source code is:\\
+	hw4qn1.f90\\
+	
+	output dat files are:\\
+	cos01sp.dat,cos01dp.dat  etc.\\
+	I plotted modulus of logE vs logH  for 3 functions for single and double precisions.\\
+	The number of decimal places obtained agrees with the estimates in the text.\\
+	The graphs looks like this:\\
+	
+	%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{cos01sp.eps}
+	\caption{Plot of $ \cos(0.1)$ single precision }
+	\end{figure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{cos01dp.eps}
+	\caption{Plot of $ \cos(0.1) $ double precision }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\clearpage
+	%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{exp01sp.eps}
+	\caption{Plot of $ \exp(0.1)$ single precision }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	
+	
+	
+	
+	\subsection{part c}
+
+	
+	I plotted the best fit of the graph with log-log fit from xmgrace.
+	Appropriate range for X and Y axes were chosen.
+	From the plots we know that for cosine function in double precision:\\
+	slope for forward differentiation is nearly 1.\\
+	slope for central differentiation is nearly 2.\\
+	slope for extrapolation differentiation is nearly 4.\\
+	
+	The source code is:\\
+	assign4/qn1/hw4qn1.f90\\
+	
+	The output plots are:\\
+	cos01dp.eps,cos1dp.eps,etc\\
+	
+	
+	
+	\subsection{part d}
+	
+	I repeated the analysis for $\cos(x)$ and $\sqrt{x}$ in double precision and
+	compared to the single precision.
+	
+	%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{hw4qn2_1.eps}
+	\caption{Plot of $ \cos(0.1)$ }
+	\end{figure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	
+	The source code is:\\
+	assign4/qn1/hw4qn1.f90\\
+	
+	The output data files are:\\
+	cos01dp.dat,cos1dp.dat,etc\\
+	
+	The output plots are:\\
+	cos01dp.eps,cos1dp.eps,etc\\
+	
+	
+	
+	\subsection{part e}
+	In the above plots I paid special attention to the algorithmic errors.
+	The best fit was plotted for the algorithmic error part.
+	The best fit eps files are inside qn1 folder.
+	
+
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Question 2}
+In this question we studied three-point and five point formula for second order derivative
+of functions.
+\subsection{part a}
+The three-point and five-point formula was derived and the pdf can be
+found inside:
+writeup/hw4qn2a.pdf\\
+or, qn1/hw4qn2a.pdf\\
+
+
+\subsection{part b}
+I wrote the code to calculate 2nd order derivative for $cos(x)$ in single precision for the 3 values of 
+$x=0.1$,$x=1$,$x=30$. I started with h=0.314 and keep going down upto machine precision 1e-6.\\
+While calculating derivative special attention was given in grouping the terms. Similar terms are grouped
+together.\\
+The grouping can be seen in the source code.\\
+The source code is:\\
+qn2/hw4qn2.f90\\
+
+and the outpuf files are:\\
+$hw4qn2\_1.dat, hw4qn2\_01.dat,and, hw4qn2_30.dat.$\\
+
+\subsection{part c}
+The derivative and its relative errors were produced.
+I reduced step size upto 1e-6 for single precision.
+
+\subsection{part d}
+The log-log plot of logE versus logH was created.
+The plots are:\\
+$hw4qn2\_1.eps, hw4qn2\_01.eps,and, hw4qn2_30.eps.$\\
+The number of decimal places obtained agrees with the estimates in the text.
+
+\subsection{part e}
+We can see truncation error at large h and roundoff error at small h in the graph.
+
+
+\section{Question 3: Population Growth Problem}
+In this problem we solved population growth equation both numerically and analytically.
+\subsection{part a: when b=0}
+First we took, $b=0$ and solved the equation.
+The source code is:\\
+$qn3/hw4qn3a.f90$\\
+
+The output is:\\
+$qn3/hw4qn3a.dat$\\
+
+The plot is:\\
+$qn3/hw4qn3a.eps$\\
+\clearpage
+
+\subsection{part b: when b=3}
+Here, we took a =10 and b=3.
+The source code is:\\
+qn3/hw4qn3b.f90\\
+
+The output is:\\
+qn3/hw4qn3b.dat\\
+
+the plot is :\\
+qn3/hw4qn3b.eps\\
+
+
+Initially the population decreases with time since the $-bN^2$ term dominates and as the 
+time passes by population growth seems to be constant. We can see this in the plots.
+
+
+
+\end{document}
+

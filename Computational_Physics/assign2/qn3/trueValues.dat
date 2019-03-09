@@ -1,0 +1,10 @@
+# j(l) values for for x = 0.1 ( from Stegun table)
+    jtrue(0) =	0.99833
+    jtrue(1) =	0.03330				
+    jtrue(2) = 	0.00067		
+    jtrue(3) =	9.5185e-6		
+    jtrue(4) =	1.0577e-7
+    jtrue(5) =	9.6163e-10
+    jtrue(6) = 	7.3975e-12		
+    jtrue(7) =  4.9319e-14
+    jtrue(8) =	2.9012e-16

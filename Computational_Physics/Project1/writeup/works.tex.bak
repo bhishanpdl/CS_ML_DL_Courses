@@ -1,0 +1,265 @@
+\documentclass[11pt,a4paper,english]{article}
+\usepackage{babel}
+\usepackage{amssymb}
+\usepackage{graphicx,subfigure}
+\usepackage[export]{adjustbox}    % for positioning figure
+\usepackage{textcomp}
+\usepackage{fixltx2e}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+% some useful newcommands
+\newcommand{\nl}{\nonumber \\}
+\newcommand{\no}{\nonumber}
+\newcommand{\ul}{\underline}
+\newcommand{\ol}{\overline}
+
+%some useful newcommands
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bfig}{\begin{figure}}
+\newcommand{\efig}{\end{figure}}
+\newcommand{\beqa}{\begin{eqnarray}}
+\newcommand{\eeqa}{\end{eqnarray}}
+\newcommand{\beqan}{\begin{eqnarray*}}
+\newcommand{\eeqan}{\end{eqnarray*}}
+\newcommand{\ba}{\begin{array}}
+\newcommand{\ea}{\end{array}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\bfl}{\begin{flushleft}}
+\newcommand{\efl}{\end{flushleft}}
+\newcommand{\btab}{\begin{tabular}}
+\newcommand{\etab}{\end{tabular}}
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\bdes}{\begin{description}}
+\newcommand{\edes}{\end{description}}
+\newcommand{\bdm}{\begin{displaymath}}
+\newcommand{\edm}{\end{displaymath}}
+\newcommand {\IR} [1]{\textcolor{red}{#1}}
+
+% for listing
+\usepackage{enumitem}
+\usepackage[ampersand]{easylist}
+\ListProperties(Hide=100, Hang=true, Progressive=3ex, Style*=-- ,
+Style2*=$\bullet$ ,Style3*=$\circ$ ,Style4*=\tiny$\blacksquare$ )    % for easylist
+\newcommand{\begl}{\begin{easylist}}
+\newcommand{\eegl}{\end{easylist}}
+
+% for hyperlink
+\usepackage{hyperref}             % for hyperlink
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,    
+    bookmarks=true
+    }
+
+
+% Creating Title for the assessment
+
+\title{Project 1}
+\author{Bhishan Poudel}
+\date{\today}
+
+% to avoid indentation in paragraphs
+\usepackage[parfill]{parskip}
+
+% begin of document
+\begin{document}
+\maketitle
+\tableofcontents
+\listoffigures
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Question 1: Quantum Uncertainty in the Harmonic Oscillator}
+In this question we studied the quantum uncertainty in the harmonic oscillator.\\
+
+	
+	\subsection{part a}
+	
+	In this part we studied the Hermite polynomials and harmonic oscillator wave functions.
+	
+	\subsubsection{Hermite Polynomials}
+	
+In this part I wrote a code to calculate Hermite polynomials. The data are saved for $n=1,2,3 $ for the plotting and data for $n=5,12$ are saved to compare exact values of table of Abramowitz.\\
+The Hermite Polynomials were calculated using the recursion relation:\\
+
+\beqa
+H_{n}(x)=2xH_{n}(x)-2nH_{n-1}(x)
+\eeqa
+
+The first two Hermite Polynomials are:\\
+$H_{0}(x)=1$\\
+$H_{1}(x)=2x$
+
+    folder       : qn1a/polynomial\\
+	outputs      : n1.dat,n2.dat,n3.dat,n5.dat,n12.dat\\
+	plots        : hnx123.eps\\
+	
+		%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{hnx123.eps}
+	\caption{pr1qn1apoly }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Harmonic Oscillator Wave Functions}
+	
+In this part we studied the harmonic oscillator wave functions. The wave function of a spinless point particle in a quadratic potential well given by:\\
+\beqa
+\psi_{n}(x)=\frac{1}{\sqrt{2^{n}n!\sqrt{\pi}}} e^{\frac{-x^{2}}{2}} H_{n}(x)
+\eeqa
+
+I wrote a code to calculate wave functions for $n=0,1,2,3$ in the range $x=-4,4$\\
+
+    folder       : qn1a/wavefunction\\
+	outputs      : n0.dat,n1.dat,n2.dat,n3.dat\\
+	plots        : pr1qn1a.eps\\
+	
+		%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{pr1qn1a.eps}
+	\caption{hw6qn1a }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	
+	
+	\subsection{part b}
+In this part I plotted the wave function for $n=30$ from $x=-10,10$. I also calculated the time of run for the code using bash command time.
+
+    folder       : qn1b\\
+	outputs      : n30.dat\\
+	plots        : pr1qn1b.eps\\
+		
+	%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{pr1qn1b.eps}
+	\caption{hw6qn1b }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+
+	
+	\subsection{part c}
+In this part I wrote a code to calculate root mean square position. The root mean square position is given by:\\
+\beq
+<x^{2}> = \int_{-\infty}^{\infty} \!\! x^{2} |\psi_{n}(x)|^{2}  \,dx 
+\eeq
+Where $\psi_{n}(x)$ is given by eq.(2)\\
+
+    folder       : qn1c\\
+	source code  : gaulag.f90 (it was provided)\\
+	source code  : pr1qn1c.f90\\
+	outputs      : pr1qn1c.dat\\
+
+\clearpage	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Question 2: High Energy Scattering Cross Section}
+In this problem we studied the high energy scattering of electron by alpha particle.
+
+	
+	\subsection{part a: Yukawa Potential}
+In this part we studied the ionic potential:\\
+The given values are:\\
+$ Z=2 $\\
+$ a_{0} = 0.5292 A^{0} $\\
+$ r_{0}= a_{0}/4 = 0.1323 A^{0}$\\
+$ \frac{e^{2}}{4\pi\epsilon_{0}} = 14.4 A^{0} eV $
+
+	\beqa
+	V(r) &=& \frac{1}{4\pi\epsilon_{0}} \frac{Ze^{2}}{r} e^{-r/r_{0}} \\
+	 &=& Z \frac{e^{2}}{4\pi\epsilon_{0}} \frac{ e^{-r/r_{0}}}{r} \no\\
+	 &=& 2 * 14.40 * \frac{ e^{-r/r_{0}}}{r}  \no\\
+	 &=& 28.8 * \frac{ e^{-r/0.1323}}{r}  \no\\
+	 &=& 28.8 * \frac{ e^{-7.559r}}{r} \quad\quad (eV) \no\\
+	\eeqa
+
+    folder       : qn2/potential\\
+	source code  : pr1qn2pot.f90\\
+	outputs      : pr1qn2pot.dat\\
+	plots        : pr1qn2pot.eps\\
+	
+	
+	%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{pr1qn2pot.eps}
+	\caption{pr1qn2pot }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	
+	\subsection{part b: Scattering Amplitude}
+In this question I have used following values:\\
+Here, values used are:\\
+$ mc^{2} = 0.5110 Mev $\\
+$ k = 8 (A^{0})^{-1} $\\
+$ \hslash c = 197.33 Mev fm $
+Using Born approximation, the scattering amplitude is given by:\\
+\beq
+f(\theta)= -\frac{2m}{q\hslash^{2}}\!\! \int_0^\infty \!\! r V(r) sin(qr) \, dr
+\eeq
+Where, $ q=2ksin(\theta/2) $
+where, k is initial or final magnitude of momentum. For low energy scattering $ kr_{0}<< 1$.
+For high energy scattering I have chosen $ kr_{0} = 1$ then we get $ k = 8 (A^{0})^{-1} $.
+\beqa
+f(\theta) &=& -\frac{2m}{q\hslash^{2}}\!\! \int_0^\infty \!\! r V(r) sin(qr) \, dr \\
+&=& -\frac{2mc^{2}}{(2ksin(\theta/2)\hslash^{2}c^{2}}\!\! \int_0^\infty \!\! r (28.80) \frac{ e^{-7.559r}}{r} sin(2krsin(\theta/2))  \, dr \no\\
+&=& -\frac{0.4726}{sin(\theta/2)}\!\! \int_0^\infty \!\! sin(16rsin(\theta/2)) e^{-7.559r}\,dr  \no\\
+\eeqa
+Comparing to the standard format for generalized Gauss-Laguerre quadrature:\\
+\bdm
+I = \int_0^\infty \!\! e^{-r}r^{\alpha}\ \!f(r)\,dr 
+\edm
+we get:
+$\alpha = 0 $ and \\
+\bdm
+f(r) = -\frac{0.4726}{sin(\theta/2)} sin(16rsin(\theta/2)) e^{r-7.559r}
+\edm
+    folder       : qn2/amplitude\\
+	source code  : gaulag.f90   (obtained from Numerical Recipe)\\
+	source code  : pr1qn2amp.f90\\
+	outputs      : pr1qn2amp.dat\\
+	plots        : pr1qn2amp.eps\\
+	
+	
+	%%%%% including figure %%%%%%%%%%%%%%%%%%
+	\begin{figure}[h!]
+	\centering
+	\includegraphics [scale=0.6]{pr1qn2amp.eps}
+	\caption{pr1qn2amp }
+	\end{figure}
+	\clearpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+	
+	\subsection{part c: Total Scattering Cross Section}
+In this part I calculated the total cross section area.\\
+The total cross section area is given by:\\
+\bdm
+\sigma=2\pi \quad \int_0^\pi \!\!  sin\theta |f(\theta)|^{2}\, d\theta
+\edm 
+Here i used the program for amplitude as a subroutine to find $f(\theta)$ and used Gauss-Legendre quadrature
+to integrate the integral.\\
+In the code i used do loop from $0$ to $20$ gauss points and 
+obtained the converging result $0.4015E-01 (A^{0})^{2}$.\\
+    folder       : qn2/cross-section\\
+    source code  : gauleg.f90 (from Numerical Recipe) \\
+	source code  : pr1qn2cross.f90\\
+	outputs      : pr1qn2cross.dat\\ 
+
+\end{document}
+

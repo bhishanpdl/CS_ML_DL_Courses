@@ -1,0 +1,25 @@
+ 
+ input matrix A
+           -2.00            2.00           -3.00
+            2.00            1.00           -6.00
+           -1.00           -2.00            0.00
+ 
+ Real eigenvalues
+           -3.00
+            5.00
+           -3.00
+ 
+ Imaginary eigenvalues
+            0.00
+            0.00
+            0.00
+ 
+ Left eigenvectors
+           -0.83            0.27            0.00
+            0.14            0.53            0.45
+           -0.54           -0.80            0.89
+ 
+ Right eigenvectors
+           -0.95            0.41            0.05
+            0.27            0.82            0.82
+           -0.14           -0.41            0.57

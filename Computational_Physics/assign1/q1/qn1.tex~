@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Assignment 1}
+%cmd: clear; latex qn1.tex
+%cmd: clear; xdvi qn1.dvi
+
+
+\author{Bhishan Poudel}
+\date{August 2015}
+
+\begin{document}
+
+\maketitle
+
+\section{Qn.1}
+
+In this question we studied to plot the Bessel functions j0(x) and j1(x).
+
+
+Pseudo-code to plot jo(x) is: //
+    open a file to store data //
+        if(x<=0)//
+            y = sin(x)/x//
+    close file 
+    
+Caveat: There is singularity at x = 0, so we used Taylor expansion at points near x = 0.
+Similar caution was taken to j1(x).
+The source codes are attaced in the tar file under location:
+Homeworks/qn1/ 
+
+
+
+
+\end{document}
+
