@@ -44,14 +44,25 @@ def parse_args():
     print("FLAGS.debug = {}".format(FLAGS.debug))
     
     return FLAGS
+    
 
-def debug_numGrad(FLAGS):
+def softmax_scipy():
+    
     FLAGS = parse_args()
-    
-    # Variables for debug
-    numClasses = 10     # Number of classes (MNIST digits 0-9 are 10 classes)
+
+    # Initiliaze values
+    inputSize = 28 * 28 # Size of input vector (MNIST images are 28x28)
+    numClasses = 10     # Number of classes (MNIST images fall into 10 classes)
     decay = 1e-4        # Weight decay parameter
-    
+
+    # Load training data
+    images = np.load(FLAGS.input_data_dir + 'train-images.npy')
+    labels = np.load(FLAGS.input_data_dir + 'train-labels.npy')
+    print("\n\n For MNIST train data")
+    print("images.shape = {}".format(images.shape)) # (784, 55000)
+    print("labels.shape = {}".format(labels.shape)) # (55000,)
+    print("\n\n")
+
     # -------------------------------------------------------
     # Create data for debugging
     if FLAGS.debug:
@@ -59,21 +70,19 @@ def debug_numGrad(FLAGS):
         np.random.seed(100)
         images = randn(8, 100)
         labels = randint(0, 10, 100, dtype = np.uint8)
-        
 
-        # Randomly initialise theta (theta is 1d array)
-        np.random.seed(100)
-        theta = 0.005 * randn(numClasses * inputSize)
+    # Randomly initialise theta (theta is 1d array)
+    np.random.seed(100)
+    theta = 0.005 * randn(numClasses * inputSize)
 
-        # Get cost and grad 
-        cost, grad = softmaxCost(theta, numClasses, inputSize, decay, images, labels)
+    # Get cost and grad 
+    cost, grad = softmaxCost(theta, numClasses, inputSize, decay, images, labels)
 
-            
+
     # ---------------- debug: Gradient Checking Start ------------------------
     if FLAGS.debug:
         checkNumericalGradient()
 
-        # note: softmaxCost gives cost and grad (two outputs)
         numGrad = computeNumericalGradient(
                     lambda x: softmaxCost(x, numClasses, inputSize, decay, images, labels),
                     theta
@@ -87,36 +96,7 @@ def debug_numGrad(FLAGS):
         diff = norm(numGrad - grad) / norm(numGrad + grad)
         print(diff)
         sys.exit(1)
-    # ---------------- debug: Gradient Checking End ------------------------     
-
-def softmax_scipy(): 
-    FLAGS = parse_args()
-
-    # Initiliaze values
-    inputSize = 28 * 28 # Size of input vector (MNIST images are 28x28 = 784)
-    numClasses = 10     # Number of classes (MNIST digits 0-9 are 10 classes)
-    decay = 1e-4        # Weight decay parameter
-
-    # Load training data
-    images = np.load(FLAGS.input_data_dir + 'train-images.npy')
-    labels = np.load(FLAGS.input_data_dir + 'train-labels.npy')
-    
-    print("\n\n For MNIST train data")
-    print("images.shape = {}".format(images.shape)) # (784, 55000)
-    print("labels.shape = {}".format(labels.shape)) # (55000,)
-    print("\n\n")
-
-
-
-    # Randomly initialise theta (theta is 1d array)
-    np.random.seed(100)
-    theta = 0.005 * randn(numClasses * inputSize)
-
-    # Get cost and grad 
-    cost, grad = softmaxCost(theta, numClasses, inputSize, decay, images, labels)
-
-
-
+    # ---------------- debug: Gradient Checking End ------------------------
 
                                         
     # Fit the model and get theta (theta is flat array)
@@ -135,27 +115,22 @@ def softmax_scipy():
     # Test the data
     images = np.load(FLAGS.input_data_dir + 'test-images.npy')
     labels = np.load(FLAGS.input_data_dir + 'test-labels.npy')
-    
     print("\n\n For MNIST test data")
     print("images.shape = {}".format(images.shape)) # (784, 10000)
     print("labels.shape = {}".format(labels.shape)) # (10000,)
     print("\n\n")
 
+
+
     # Get prediction for test data
-    theta = theta.reshape (numClasses, inputSize) # shape 10, 784
+    theta = np.reshape(theta, (numClasses, inputSize))
     pred = softmaxPredict(theta, images)
     acc = np.mean(labels == pred)
     print('Accuracy: %0.3f%%.' % (acc * 100)) # 92.560%.
 
 def main():
     """Run main function."""
-    FLAGS = parse_args()
-    
-    if FLAGS.debug:
-        debug_numGrad(FLAGS)
-        
-    if not FLAGS.debug:
-        softmax_scipy()
+    softmax_scipy()
 
 if __name__ == "__main__":
     import time

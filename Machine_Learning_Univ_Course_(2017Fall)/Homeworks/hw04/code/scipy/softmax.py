@@ -9,9 +9,8 @@ def softmaxCost(theta, numClasses, inputSize, decay, data, labels):
         theta: 1d array of parameter.
                example of theta ::
                  numClasses = 10
-                 inputSize  = 28 * 28 = 784
+                 inputSize  = 28 * 28
                  theta = 0.005 * randn(numClasses * inputSize)
-                       = 1d array of shape (7840,)
                      
         numClasses: the number of classes (e.g. 10)
         
@@ -23,7 +22,7 @@ def softmaxCost(theta, numClasses, inputSize, decay, data, labels):
               where each row data[i, :] corresponds to a single sample
               e.g. 55000, 784
              
-        labels: an N x 1 matrix containing the labels corresponding for the input data
+        labels: an M x 1 matrix containing the labels corresponding for the input data
                 e.g. shape is  (55000,)
              
     Return:
@@ -36,24 +35,22 @@ def softmaxCost(theta, numClasses, inputSize, decay, data, labels):
     
     .. math::
 
-        E(w) = - \\frac{1}{N} \\sum_{n=1}^N \sum_{k=1}^K \\sumN_delta_k(t_n) ln \\frac{exp(w_k x_n)}{Z(x_n)} + \\
+        E(w) = - \\frac{1}{N} \\sum_{n=1}^N \sum_{k=1}^K \\delta_k(t_n) ln \\frac{exp(w_k x_n)}{Z(x_n)} + \\
         \\frac{\lambda}{2} \sum_{k=1}^K w_k^2
 
     Also the gradient is given by:
 
-    .. math:: \\nabla_{w_k} E(w) = - \\frac{1}{N} \\sum_{n=1}^N ( \\sumN_delta_k(t_n) - p(C_k | x_n)) x_n + \\lambda w_k
+    .. math:: \\nabla_{w_k} E(w) = - \\frac{1}{N} \\sum_{n=1}^N ( \\delta_k(t_n) - p(C_k | x_n)) x_n + \\lambda w_k
        
     """
 
     # Unroll the parameters from theta
-    theta = theta.reshape(numClasses, inputSize) # shape (10,784)
+    theta = np.reshape(theta, (numClasses, inputSize))
 
-    N = data.shape[1] # 55k examples.
+    numCases = data.shape[1]
 
-    groundTruth = coo_matrix( (  np.ones(N, dtype = np.uint8),
-                                 (labels, np.arange(N))
-                              )
-                             ).toarray()
+    groundTruth = coo_matrix((np.ones(numCases, dtype = np.uint8),
+                            (labels, np.arange(numCases)))).toarray()
     cost = 0
     thetagrad = np.zeros((numClasses, inputSize))
 
@@ -64,21 +61,20 @@ def softmaxCost(theta, numClasses, inputSize, decay, data, labels):
     # print("groundTruth.shape = {}".format(groundTruth.shape)) # (10, 55000)
     
     X = data
-    z = theta @ X # shape (10,784) (784,55000) = (10, 55000)
+    z = theta @ X
     N = data.shape[1]
-    sumN_delta = groundTruth
+    delta = groundTruth
    
-    hyp = np.exp(z-np.amax(z, axis=0, keepdims=True)) # (10, 55000)
-    prob = hyp / np.sum(hyp, axis = 0) # (10, 55000)
-    cost = np.multiply(sumN_delta, np.log(prob)) # (10, 55000)
-    cost = -1/N * np.sum(cost) # (scalar)
+    hyp = np.exp(z-np.amax(z, axis=0, keepdims=True)) # to prevent overflow
+    prob = hyp / np.sum(hyp, axis = 0)
+    cost = np.multiply(delta, np.log(prob))
+    cost = -1/N * np.sum(cost)
     
     weight_decay = 1/2 * decay * np.sum(theta**2)
     cost = cost + weight_decay
     
     # now find gradient of cost function
-    # thetagrad shape = (10, 55000) (55000,784) = (10, 784)
-    thetagrad = -1/N *  (sumN_delta - prob) @ X.T + decay * theta
+    thetagrad = - (delta - prob) @ X.T / N + decay * theta
 
     # Unroll the gradient matrices into a vector for the optimization function.
     grad = thetagrad.ravel()
@@ -119,12 +115,12 @@ def softmaxGrad(theta, numClasses, inputSize, decay, data, labels):
     
     .. math::
 
-        E(w) = - \\frac{1}{N} \\sum_{n=1}^N \sum_{k=1}^K \\sumN_delta_k(t_n) ln \\frac{exp(w_k x_n)}{Z(x_n)} + \\
+        E(w) = - \\frac{1}{N} \\sum_{n=1}^N \sum_{k=1}^K \\delta_k(t_n) ln \\frac{exp(w_k x_n)}{Z(x_n)} + \\
         \\frac{\lambda}{2} \sum_{k=1}^K w_k^2
 
     Also the gradient is given by:
 
-    .. math:: \\nabla_{w_k} E(w) = - \\frac{1}{N} \\sum_{n=1}^N ( \\sumN_delta_k(t_n) - p(C_k | x_n)) x_n + \\lambda w_k
+    .. math:: \\nabla_{w_k} E(w) = - \\frac{1}{N} \\sum_{n=1}^N ( \\delta_k(t_n) - p(C_k | x_n)) x_n + \\lambda w_k
        
     """
 
@@ -149,16 +145,15 @@ def softmaxGrad(theta, numClasses, inputSize, decay, data, labels):
     # print("groundTruth.shape = {}".format(groundTruth.shape)) # (10, 55000)
     
     X = data
-    z = theta @ X # shape (10,784) (784,55000) = (10, 55000)
+    z = theta @ X
     N = data.shape[1]
-    sumN_delta = groundTruth
+    delta = groundTruth
    
-    hyp = np.exp(z-np.amax(z, axis=0, keepdims=True)) # (10, 55000)
-    prob = hyp / np.sum(hyp, axis = 0) # (10, 55000)
+    hyp = np.exp(z-np.amax(z, axis=0, keepdims=True)) # to prevent overflow
+    prob = hyp / np.sum(hyp, axis = 0)
     
     # now find gradient of cost function
-    # thetagrad shape = (10, 55000) (55000,784) = (10, 784)
-    thetagrad = -1/N *  (sumN_delta - prob) @ X.T + decay * theta
+    thetagrad = - (delta - prob) @ X.T / N + decay * theta
 
     # Unroll the gradient matrices into a vector for the optimization function.
     grad = thetagrad.ravel()

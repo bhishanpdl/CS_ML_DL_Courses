@@ -38,8 +38,12 @@ import numpy.polynomial.polynomial as poly
 
 
 def read_data(infile):
-    X,t = np.loadtxt(infile,unpack=True)
-    return X,t
+    """Read the datafile and return arrays"""
+    data = np.genfromtxt(infile, delimiter=None,dtype=int)
+    X = data[:,0].reshape(len(data),1)
+    t = data[:,-1].reshape(len(data),1)
+
+    return [X, t]
 
 
 #
@@ -59,10 +63,10 @@ def train(X, t):
     sum_x = sum(X)
     sum_t = sum(t)
 
-    sum_xsp = sum(X*X)
+    sum_xx = sum(X*X)
     sum_tx = sum(X*t)
 
-    w1 = (sum_t * sum_x - N * sum_tx) / (sum_x * sum_x - N * sum_xsp)
+    w1 = (sum_t * sum_x - N * sum_tx) / (sum_x * sum_x - N * sum_xx)
     w0 = (sum_t - w1 * sum_x) / N
 
     w = np.array([w0, w1])
