@@ -1,0 +1,21 @@
+If you forget Alfred keywords
+Go to Alfred type Alfred udemy, and hit shift, 
+this file will be shown in quick view.
+==============================================
+
+
+mvu = move xlxs files from downloads to udemy data excel
+udf = udf 4.4 copies the base name of excel file with name 4.4**exercise.xlxs.
+udo = opens excel files
+scru = scru 4.6 will create 4.6.png file in udemy data snapshots folder.
+jnbu = goes to notebooks folder and open jupyter notebook.
+
+
+
+Snippets
+=========
+u;imp = udemy imports
+u;hts = udemy dataframe head tail
+u;df= udemy dataframe
+u;img = udemy Image()
+

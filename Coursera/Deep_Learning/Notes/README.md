@@ -1,0 +1,1 @@
+1. Deep learning note slide is taken from: https://www.slideshare.net/TessFerrandez/notes-from-coursera-deep-learning-courses-by-andrew-ng?from_action=save
